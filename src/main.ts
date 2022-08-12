@@ -1,3 +1,8 @@
+/*
+ * @Author: Pan Jingyi
+ * @Date: 2022-06-23 03:51:07
+ * @LastEditTime: 2022-08-12 18:13:17
+ */
 import { createApp } from 'vue'
 import { registerApp } from './global'
 import App from './App.vue'
@@ -9,7 +14,7 @@ import './assets/css/index.less'
 import router from './router'
 import store from './store'
 
-import myRequest from './service'
+//import myRequest from './service'
 
 const app = createApp(App)
 

@@ -1,3 +1,8 @@
+/*
+ * @Author: Pan Jingyi
+ * @Date: 2022-06-26 10:07:29
+ * @LastEditTime: 2022-08-12 18:14:12
+ */
 import { Module } from 'vuex'
 
 import { accountLoginRequest } from '@/service/login/login'
@@ -29,7 +34,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       const loginResult = await accountLoginRequest(payload)
       console.log(loginResult)
       console.log(loginResult.data.id, loginResult.data.token)
-      const { id, token } = loginResult.data
+      const { token } = loginResult.data
       commit('changeToken', token)
     }
     // phoneLoginAction({ commit }, payload: any) {
