@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-08-13 03:49:14
+ * @LastEditTime: 2022-08-13 17:30:36
  */
 const path = require('path')
 
@@ -10,8 +10,7 @@ module.exports = {
   devServer: {
     proxy: {
       '^/api': {
-        target:
-          'https://www.fastmock.site/mock/59cef99bcb55aa62075a94a7758d9a53/api',
+        target: 'http://152.136.185.210:4000',
         pathRewrite: {
           '^/api': ''
         },

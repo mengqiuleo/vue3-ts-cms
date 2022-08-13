@@ -1,3 +1,8 @@
+/*
+ * @Author: Pan Jingyi
+ * @Date: 2022-06-23 14:14:25
+ * @LastEditTime: 2022-08-13 17:55:44
+ */
 import { App } from 'vue'
 import 'element-plus/dist/index.css'
 // import 'element-plus/lib/theme-chalk/index.css'

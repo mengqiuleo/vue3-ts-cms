@@ -1,7 +1,7 @@
 /*
  * @Date: 2022-04-15 16:23:14
- * @LastEditors: wuyuxin
- * @LastEditTime: 2022-05-05 14:15:11
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2022-08-13 20:11:02
  * @FilePath: \Vue3-ts-cms\src\global\register-icon.ts
  * @description: 文件描述
  */
@@ -18,6 +18,8 @@ import {
   Iphone,
   Monitor,
   Goods,
+  Document,
+  Location,
   ChatLineRound,
   Setting,
   Fold,
@@ -35,6 +37,8 @@ const component = [
   Iphone,
   Monitor,
   Goods,
+  Document,
+  Location,
   ChatLineRound,
   Setting,
   Fold,
