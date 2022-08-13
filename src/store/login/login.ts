@@ -1,11 +1,17 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-26 10:07:29
- * @LastEditTime: 2022-08-12 18:14:12
+ * @LastEditTime: 2022-08-13 16:49:10
  */
 import { Module } from 'vuex'
 
-import { accountLoginRequest } from '@/service/login/login'
+import {
+  accountLoginRequest,
+  requestUserInfoById,
+  requestUserMenusByRoleId
+} from '@/service/login/login'
+import localCache from '@/utils/cache'
+import router from '@/router'
 
 import { IAccount } from '@/service/login/type'
 
@@ -17,29 +23,66 @@ const loginModule: Module<ILoginState, IRootState> = {
   state() {
     return {
       token: '',
-      userInfo: {}
+      userInfo: {},
+      userMenus: []
     }
   },
   getters: {},
   mutations: {
     changeToken(state, token: string) {
-      console.log(token)
+      console.log('保存token', token)
       state.token = token
+    },
+    changeUserInfo(state, userInfo: any) {
+      state.userInfo = userInfo
+    },
+    changeUserMenus(state, userMenus: any) {
+      state.userMenus = userMenus
     }
   },
   actions: {
     async accountLoginAction({ commit }, payload: IAccount) {
-      console.log('执行accountLoginAction', payload)
-      // 实现登录逻辑
+      console.log('执行store的异步action去登录', payload)
+      // 1.实现登录逻辑
       const loginResult = await accountLoginRequest(payload)
       console.log(loginResult)
       console.log(loginResult.data.id, loginResult.data.token)
-      const { token } = loginResult.data
+      const { token, id } = loginResult.data
       commit('changeToken', token)
+      localCache.setCache('token', token)
+
+      // 2.请求用户信息
+      const userInfoResult = await requestUserInfoById(id)
+      console.log('输出用户信息', userInfoResult)
+      const userInfo = userInfoResult.data
+      commit('changeUserInfo', userInfo)
+      localCache.setCache('userInfo', userInfo)
+
+      // 3.请求用户菜单
+      const userMenusResult = await requestUserMenusByRoleId(userInfo.role.id)
+      const userMenus = userMenusResult.data
+      console.log('用户菜单：', userMenus)
+      commit('changeUserMenus', userMenus)
+      localCache.setCache('userMenus', userMenus)
+
+      //4.跳到首页
+      router.push('/main')
+    },
+    // 每次首次运行代码时，加载下vuex
+    loadLocalLogin({ commit }) {
+      const token = localCache.getCache('token')
+      if (token) {
+        commit('changeToken', token)
+      }
+      const userInfo = localCache.getCache('userInfo')
+      if (userInfo) {
+        commit('changeUserInfo', userInfo)
+      }
+      const userMenus = localCache.getCache('userMenus')
+      if (userMenus) {
+        commit('changeUserMenus', userMenus)
+      }
     }
-    // phoneLoginAction({ commit }, payload: any) {
-    //   console.log('执行phoneLoginAction', payload)
-    // }
   }
 }
 

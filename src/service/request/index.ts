@@ -8,12 +8,13 @@ import { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
 const DEFAULT_LOADING = true
 
 class MYRequest {
-  instance: AxiosInstance
+  instance: AxiosInstance //一个属性，用来存放我们传入的配置
   interceptors?: MYRequestInterceptors
   showLoading: boolean
   loading?: LoadingInstance
 
   constructor(config: MYRequestConfig) {
+    // config是我们自己传入的配置
     this.instance = axios.create(config)
     this.interceptors = config.interceptors
 
@@ -33,8 +34,7 @@ class MYRequest {
     //# 添加所有的实例都有的拦截器
     this.instance.interceptors.request.use(
       (config: any) => {
-        console.log('所有的实例都有的拦截器：请求拦截成功')
-        //# 添加loading组件
+        // 添加loading组件
         if (this.loading) {
           this.loading = ElLoading.service({
             lock: true,
@@ -45,19 +45,16 @@ class MYRequest {
         return config
       },
       (err: any) => {
-        console.log('所有的实例都有的拦截器：请求拦截失败')
         return err
       }
     )
     this.instance.interceptors.response.use(
       (res) => {
-        console.log('所有的实例都有的拦截器：响应拦截成功')
-
         // 移除loading
         this.loading?.close()
 
-        //# 例子2：利用后端的判断码进行判断
-        const data = res.data
+        // 例子2：利用后端的判断码进行判断
+        const data = res.data //res.data才是我们真正返回的数据，这里我们拿到真正需要的数据即可，没必要拿到所有的数据
         if (data.returnCode === '-1001') {
           console.log('请求失败~，错误信息')
         } else {
@@ -65,12 +62,10 @@ class MYRequest {
         }
       },
       (err) => {
-        console.log('所有的实例都有的拦截器：响应拦截失败')
-
         // 移除loading
         this.loading?.close()
 
-        //# 例子：判断不同的HttpErrorCode显示不同的错误信息
+        // 例子：判断不同的HttpErrorCode显示不同的错误信息
         if (err.response.status === 404) {
           console.log('404的错误~')
         }
@@ -79,9 +74,11 @@ class MYRequest {
     )
   }
 
+  // 封装的这个request方法可以让我们传入请求的方式，那么下面封装真正的get,post,patch...方法就会便捷很多
+  // 上面的拦截器只是定义，下面才是真正的使用
   request<T>(config: MYRequestConfig): Promise<T> {
     return new Promise((resolve, reject) => {
-      //# 每个请求自己的拦截器
+      // 每个请求自己的拦截器
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
       }
@@ -91,10 +88,10 @@ class MYRequest {
         this.showLoading = config.showLoading
       }
 
-      this.instance
+      this.instance //this.instance 其实是根据我们传入的配置创造出来的一个axios实例
         .request<any, T>(config)
         .then((res) => {
-          // 单个请求对数据的处理
+          // 每个请求自己的拦截器
           if (config.interceptors?.responseInterceptor) {
             res = config.interceptors.responseInterceptor(res)
           }

@@ -1,3 +1,8 @@
+/*
+ * @Author: Pan Jingyi
+ * @Date: 2022-06-23 18:27:43
+ * @LastEditTime: 2022-08-13 00:50:23
+ */
 import type { AxiosRequestConfig } from 'axios'
 
 export interface MYRequestInterceptors {

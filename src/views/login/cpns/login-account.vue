@@ -1,3 +1,8 @@
+<!--
+ * @Author: Pan Jingyi
+ * @Date: 2022-06-24 22:36:11
+ * @LastEditTime: 2022-08-13 02:16:16
+-->
 <template>
   <div class="login-account">
     <el-form label-width="55px" :rules="rules" :model="account" ref="formRef">
@@ -35,15 +40,13 @@ export default defineComponent({
       name: localCache.getCache('name') ?? '',
       password: localCache.getCache('password') ?? ''
     })
-
     const formRef = ref<InstanceType<typeof ElForm>>()
 
     const loginAction = (isKeepPassword: boolean) => {
-      console.log('小组件收到消息，开始登录')
+      console.log('里面小组件收到消息，开始登录')
       formRef.value?.validate((valid) => {
-        //console.log(valid)
         if (valid) {
-          console.log('真正执行登录逻辑')
+          console.log('表单验证通过，真正执行登录逻辑')
           // 1.判断是否需要记住密码
           if (isKeepPassword) {
             //本地缓存
