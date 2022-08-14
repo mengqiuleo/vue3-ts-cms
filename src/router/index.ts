@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:16:16
- * @LastEditTime: 2022-08-13 14:04:21
+ * @LastEditTime: 2022-08-14 23:57:31
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
@@ -21,6 +21,11 @@ const routes: RouteRecordRaw[] = [
     path: '/main',
     name: 'main',
     component: () => import('@/views/main/main.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/views/not-found/not-found.vue')
   }
 ]
 
@@ -36,6 +41,9 @@ router.beforeEach((to) => {
       return '/login'
     }
   }
+
+  console.log('刷新丢失问题：', router.getRoutes())
+  console.log('刷新丢失问题：', to)
 })
 
 export default router

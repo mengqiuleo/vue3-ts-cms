@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 15:35:12
- * @LastEditTime: 2022-08-13 04:36:55
+ * @LastEditTime: 2022-08-14 23:58:23
  */
 import MYRequest from './request'
 import { BASE_URL, TIME_OUT } from './request/config'
@@ -20,7 +20,6 @@ const myRequest = new MYRequest({
       //# 注意这里！！！ 还要加上判断 config.headers
       if (token && config.headers) {
         config.headers.Authorization = `Bearer ${token}`
-        console.log('token已保存')
       }
       return config
     },

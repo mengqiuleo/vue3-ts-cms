@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 17:35:38
- * @LastEditTime: 2022-08-13 20:35:25
+ * @LastEditTime: 2022-08-13 23:44:51
 -->
 <template>
   <div class="nav-menu">
@@ -27,7 +27,10 @@
               <span>{{ item.name }}</span>
             </template>
             <template v-for="childItem in item.children" :key="childItem.id">
-              <el-menu-item :index="childItem.id + ''">
+              <el-menu-item
+                :index="childItem.id + ''"
+                @click="handleMenuItemClick(childItem)"
+              >
                 <el-icon
                   ><component :is="getIcon(childItem.icon)"></component
                 ></el-icon>
@@ -50,6 +53,7 @@
 <script lang="ts">
 import { defineComponent, computed } from 'vue'
 import { useStore } from '@/store/index'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   props: {
@@ -60,6 +64,7 @@ export default defineComponent({
   },
   setup() {
     const store = useStore()
+    const router = useRouter()
     const userMenus = computed(() => store.state.login.userMenus)
 
     const getIcon = (icons: string) => {
@@ -67,10 +72,17 @@ export default defineComponent({
         return icons.replace('el-icon-', '')
       }
     }
+    const handleMenuItemClick = (item: any) => {
+      console.log(item)
+      router.push({
+        path: item.url ?? '/not-found'
+      })
+    }
 
     return {
       userMenus,
-      getIcon
+      getIcon,
+      handleMenuItemClick
     }
   }
 })

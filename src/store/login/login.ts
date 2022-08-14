@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-26 10:07:29
- * @LastEditTime: 2022-08-13 16:49:10
+ * @LastEditTime: 2022-08-15 00:01:25
  */
 import { Module } from 'vuex'
 
@@ -11,12 +11,14 @@ import {
   requestUserMenusByRoleId
 } from '@/service/login/login'
 import localCache from '@/utils/cache'
+import { handleUserMenu } from '@/utils/map-menus'
 import router from '@/router'
 
 import { IAccount } from '@/service/login/type'
 
 import { ILoginState } from './type'
 import { IRootState } from '../type'
+import { RouteRecordRaw } from 'vue-router'
 
 const loginModule: Module<ILoginState, IRootState> = {
   namespaced: true,
@@ -30,7 +32,7 @@ const loginModule: Module<ILoginState, IRootState> = {
   getters: {},
   mutations: {
     changeToken(state, token: string) {
-      console.log('保存token', token)
+      //console.log('保存token', token)
       state.token = token
     },
     changeUserInfo(state, userInfo: any) {
@@ -38,11 +40,19 @@ const loginModule: Module<ILoginState, IRootState> = {
     },
     changeUserMenus(state, userMenus: any) {
       state.userMenus = userMenus
+      // userMenu => routes
+      const routes = handleUserMenu(userMenus)
+      //console.log(routes)
+
+      // 将routes => router.main.children
+      routes.forEach((route: RouteRecordRaw) => {
+        router.addRoute('main', route)
+      })
     }
   },
   actions: {
     async accountLoginAction({ commit }, payload: IAccount) {
-      console.log('执行store的异步action去登录', payload)
+      //console.log('执行store的异步action去登录', payload)
       // 1.实现登录逻辑
       const loginResult = await accountLoginRequest(payload)
       console.log(loginResult)
@@ -53,7 +63,7 @@ const loginModule: Module<ILoginState, IRootState> = {
 
       // 2.请求用户信息
       const userInfoResult = await requestUserInfoById(id)
-      console.log('输出用户信息', userInfoResult)
+      //console.log('输出用户信息', userInfoResult)
       const userInfo = userInfoResult.data
       commit('changeUserInfo', userInfo)
       localCache.setCache('userInfo', userInfo)
@@ -61,7 +71,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       // 3.请求用户菜单
       const userMenusResult = await requestUserMenusByRoleId(userInfo.role.id)
       const userMenus = userMenusResult.data
-      console.log('用户菜单：', userMenus)
+      //console.log('用户菜单：', userMenus)
       commit('changeUserMenus', userMenus)
       localCache.setCache('userMenus', userMenus)
 

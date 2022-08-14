@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:12:14
- * @LastEditTime: 2022-08-13 20:36:45
+ * @LastEditTime: 2022-08-14 01:23:21
 -->
 <template>
   <div class="main">
@@ -13,7 +13,9 @@
         <el-header class="page-header"
           ><nav-header @foldChange="handleFoldChange"
         /></el-header>
-        <el-main class="page-content">Main</el-main>
+        <el-main class="page-content">
+          <div class="page-info"><router-view></router-view></div>
+        </el-main>
       </el-container>
     </el-container>
   </div>

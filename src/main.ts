@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 03:51:07
- * @LastEditTime: 2022-08-13 16:49:12
+ * @LastEditTime: 2022-08-15 00:06:40
  */
 import { createApp } from 'vue'
 import { registerApp } from './global'
@@ -15,7 +15,7 @@ import { setupStore } from './store'
 const app = createApp(App)
 
 registerApp(app)
+setupStore() // 意思是每次首次运行代码都会去调一下vuex
 app.use(router)
 app.use(store)
-setupStore() // 意思是每次首次运行代码都会去调一下vuex
 app.mount('#app')
