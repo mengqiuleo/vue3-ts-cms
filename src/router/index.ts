@@ -1,11 +1,12 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:16:16
- * @LastEditTime: 2022-08-14 23:57:31
+ * @LastEditTime: 2022-08-15 00:38:39
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import localCache from '@/utils/cache'
+import { firstMenu } from '@/utils/map-menus'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -42,8 +43,11 @@ router.beforeEach((to) => {
     }
   }
 
-  console.log('刷新丢失问题：', router.getRoutes())
-  console.log('刷新丢失问题：', to)
+  // console.log('刷新丢失问题：', router.getRoutes())
+  // console.log('刷新丢失问题：', to)
+  if (to.path === '/main') {
+    return firstMenu.url
+  }
 })
 
 export default router

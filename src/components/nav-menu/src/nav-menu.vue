@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 17:35:38
- * @LastEditTime: 2022-08-13 23:44:51
+ * @LastEditTime: 2022-08-15 00:39:52
 -->
 <template>
   <div class="nav-menu">
@@ -11,7 +11,7 @@
     </div>
     <el-menu
       :collapse="collapse"
-      default-active="2"
+      :default-active="defaultValue"
       class="el-menu-vertical"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -51,9 +51,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue'
+import { defineComponent, computed, ref } from 'vue'
 import { useStore } from '@/store/index'
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { pathMapToMenu } from '@/utils/map-menus'
 
 export default defineComponent({
   props: {
@@ -65,7 +66,11 @@ export default defineComponent({
   setup() {
     const store = useStore()
     const router = useRouter()
+    const route = useRoute()
+    const currentPath = route.path
     const userMenus = computed(() => store.state.login.userMenus)
+    const menu = pathMapToMenu(userMenus.value, currentPath)
+    const defaultValue = ref(menu.id + '')
 
     const getIcon = (icons: string) => {
       if (icons && icons.indexOf('el-icon') !== -1) {
@@ -82,7 +87,9 @@ export default defineComponent({
     return {
       userMenus,
       getIcon,
-      handleMenuItemClick
+      handleMenuItemClick,
+      defaultValue,
+      currentPath
     }
   }
 })

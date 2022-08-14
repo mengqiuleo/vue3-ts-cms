@@ -1,11 +1,12 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 23:13:32
- * @LastEditTime: 2022-08-15 00:02:26
+ * @LastEditTime: 2022-08-15 01:19:47
  */
+import { IBreadcrumb } from '@/base-ui/breadcrumb'
 import { RouteRecordRaw } from 'vue-router'
 
-let firstMenuPath: any = ''
+let firstMenu: any = null
 
 export function handleUserMenu(userMenus: any): RouteRecordRaw[] {
   // 1.定义所有路由存储
@@ -29,8 +30,8 @@ export function handleUserMenu(userMenus: any): RouteRecordRaw[] {
       if (menu.type === 2) {
         const route = allRoutes.find((route) => route.path === menu.url)
         if (route) routes.push(route)
-        if (!firstMenuPath) {
-          firstMenuPath = route?.path
+        if (!firstMenu) {
+          firstMenu = menu
         }
       } else {
         _recurseGetRoute(menu.children)
@@ -43,3 +44,30 @@ export function handleUserMenu(userMenus: any): RouteRecordRaw[] {
 
   return routes
 }
+
+export function pathMapBreadcrumbs(userMenus: any[], currentPath: string) {
+  const breadcrumbs: IBreadcrumb[] = []
+  pathMapToMenu(userMenus, currentPath, breadcrumbs)
+  return breadcrumbs
+}
+
+export function pathMapToMenu(
+  userMenus: any[],
+  currentPath: string,
+  breadcrumb?: IBreadcrumb[]
+): any {
+  for (const menu of userMenus) {
+    if (menu.type === 1) {
+      const findMenu = pathMapToMenu(menu.children ?? [], currentPath)
+      if (findMenu) {
+        breadcrumb?.push({ name: menu.name })
+        breadcrumb?.push({ name: findMenu.name })
+        return findMenu
+      }
+    } else if (menu.type === 2 && menu.url === currentPath) {
+      return menu
+    }
+  }
+}
+
+export { firstMenu }

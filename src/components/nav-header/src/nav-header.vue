@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 20:13:59
- * @LastEditTime: 2022-08-14 01:02:47
+ * @LastEditTime: 2022-08-15 01:18:36
 -->
 <template>
   <div class="nav-header">
@@ -12,23 +12,36 @@
       <el-icon class="fold-menu" @click="handleFoldClick"><fold /></el-icon>
     </template>
     <div class="content">
-      <div>面包屑</div>
+      <Breadcrumb :breadList="breadList" />
       <user-info />
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import UserInfo from './user-info.vue'
+import Breadcrumb from '@/base-ui/breadcrumb'
+import { pathMapBreadcrumbs } from '@/utils/map-menus'
+import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
 
 export default defineComponent({
   components: {
-    UserInfo
+    UserInfo,
+    Breadcrumb
   },
   emits: ['foldChange'],
   setup(props, { emit }) {
     const isFold = ref(false)
+    const store = useStore()
+    const userMenus = computed(() => store.state.login.userMenus)
+    const breadList = computed(() => {
+      const route = useRoute()
+      const currentPath = route.path
+      const useBreadList = pathMapBreadcrumbs(userMenus.value, currentPath)
+      return useBreadList
+    })
 
     const handleFoldClick = () => {
       isFold.value = !isFold.value
@@ -36,7 +49,8 @@ export default defineComponent({
     }
     return {
       isFold,
-      handleFoldClick
+      handleFoldClick,
+      breadList
     }
   }
 })
