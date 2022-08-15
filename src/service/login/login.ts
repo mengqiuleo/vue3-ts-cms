@@ -1,10 +1,11 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-26 11:57:10
- * @LastEditTime: 2022-08-13 13:54:06
+ * @LastEditTime: 2022-08-15 22:27:43
  */
 import myRequest from '../index'
-import { IAccount, IDataType, ILoginResult } from './type'
+import { IAccount, ILoginResult } from './type'
+import { IDataType } from '../type'
 
 enum LoginAPI {
   AccountLogin = '/login',

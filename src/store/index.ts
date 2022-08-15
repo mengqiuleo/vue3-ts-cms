@@ -1,11 +1,11 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:33:45
- * @LastEditTime: 2022-08-13 18:53:35
+ * @LastEditTime: 2022-08-15 22:05:44
  */
 import { createStore, Store, useStore as useVuexStore } from 'vuex'
 import { IRootState, IStoreType } from './type'
-
+import system from './main/system/system'
 import login from './login/login'
 
 const store = createStore<IRootState>({
@@ -16,7 +16,8 @@ const store = createStore<IRootState>({
     }
   },
   modules: {
-    login
+    login,
+    system
   }
 })
 

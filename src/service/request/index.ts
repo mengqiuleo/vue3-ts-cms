@@ -76,7 +76,7 @@ class MYRequest {
 
   // 封装的这个request方法可以让我们传入请求的方式，那么下面封装真正的get,post,patch...方法就会便捷很多
   // 上面的拦截器只是定义，下面才是真正的使用
-  request<T>(config: MYRequestConfig): Promise<T> {
+  request<T = any>(config: MYRequestConfig): Promise<T> {
     return new Promise((resolve, reject) => {
       // 每个请求自己的拦截器
       if (config.interceptors?.requestInterceptor) {
@@ -108,16 +108,16 @@ class MYRequest {
     })
   }
 
-  get<T>(config: MYRequestConfig): Promise<T> {
+  get<T = any>(config: MYRequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'GET' })
   }
-  post<T>(config: MYRequestConfig): Promise<T> {
+  post<T = any>(config: MYRequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'POST' })
   }
-  delete<T>(config: MYRequestConfig): Promise<T> {
+  delete<T = any>(config: MYRequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'DELETE' })
   }
-  patch<T>(config: MYRequestConfig): Promise<T> {
+  patch<T = any>(config: MYRequestConfig): Promise<T> {
     return this.request<T>({ ...config, method: 'PATCH' })
   }
 }
