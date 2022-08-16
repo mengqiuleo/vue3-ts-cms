@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 20:28:01
- * @LastEditTime: 2022-08-15 20:44:36
+ * @LastEditTime: 2022-08-16 21:07:04
 -->
 <template>
   <my-form v-bind="searchFormConfig" v-model="formData">
@@ -11,7 +11,7 @@
     <template #footer>
       <div class="handle-btns">
         <el-button>
-          <el-icon><refresh /></el-icon>
+          <el-icon @click="handleResetClick"><refresh /></el-icon>
           重置
         </el-button>
         <el-button type="primary">
@@ -37,16 +37,23 @@ export default defineComponent({
   components: {
     myForm
   },
-  setup() {
-    const formData = ref({
-      id: '',
-      name: '',
-      password: '',
-      sport: '',
-      createTime: ''
-    })
+  setup(props) {
+    // 双向绑定的属性是由配置文件的field来决定
+    // 1.优化一：formData中的属性应该动态来决定
+    const formItems = props.searchFormConfig.formItem ?? []
+    const formOriginData = {}
+    for (const item of formItems) {
+      formOriginData[item.field] = ''
+    }
+    const formData = ref(formOriginData)
+
+    // 2.重置按钮
+    const handleResetClick = () => {
+      formData.value = formOriginData
+    }
     return {
-      formData
+      formData,
+      handleResetClick
     }
   }
 })

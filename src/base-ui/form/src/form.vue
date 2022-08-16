@@ -2,7 +2,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-14 11:52:25
- * @LastEditTime: 2022-08-15 20:09:38
+ * @LastEditTime: 2022-08-16 21:16:51
 -->
 <template>
   <div class="my-form">
@@ -61,7 +61,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref, watch } from 'vue'
+import { formItemValidateStates } from 'element-plus'
+import { computed, defineComponent, PropType, ref, watch } from 'vue'
 import { IFormItem } from '../type'
 
 export default defineComponent({
@@ -96,6 +97,14 @@ export default defineComponent({
   emits: ['update:modelValue'],
   setup(props, { emit }) {
     const formData = ref({ ...props.modelValue })
+
+    watch(
+      () => props.modelValue,
+      (newValue) => {
+        formData.value = { ...newValue }
+      }
+    )
+
     watch(formData, (newValue) => emit('update:modelValue', newValue), {
       deep: true
     })

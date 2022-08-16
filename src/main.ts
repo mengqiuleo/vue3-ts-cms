@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 03:51:07
- * @LastEditTime: 2022-08-15 00:06:40
+ * @LastEditTime: 2022-08-16 06:24:52
  */
 import { createApp } from 'vue'
 import { registerApp } from './global'

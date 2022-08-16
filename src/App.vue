@@ -1,16 +1,28 @@
+<!--
+ * @Author: Pan Jingyi
+ * @Date: 2022-06-23 03:51:07
+ * @LastEditTime: 2022-08-16 12:46:16
+-->
 <template>
-  <div class="app">
+  <el-config-provider :locale="locale">
     <router-view></router-view>
-  </div>
+  </el-config-provider>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import zhCn from 'element-plus/lib/locale/lang/zh-cn'
+
 export default defineComponent({
   name: 'App',
   props: {
     name: {
       type: String
+    }
+  },
+  setup() {
+    return {
+      locale: zhCn
     }
   }
 })
