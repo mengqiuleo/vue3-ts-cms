@@ -1,12 +1,17 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 21:10:13
- * @LastEditTime: 2022-08-16 20:46:30
+ * @LastEditTime: 2022-08-17 00:13:23
 -->
 <template>
   <div class="user">
-    <PageSearch :searchFormConfig="searchFormConfig" />
+    <PageSearch
+      :searchFormConfig="searchFormConfig"
+      @resetBtnClick="handleResetClick"
+      @queryBtnClick="handleQueryClick"
+    />
     <PageContent
+      ref="pageContentRef"
       :contentTableConfig="contentTableConfig"
       pageName="users"
     ></PageContent>
@@ -20,6 +25,8 @@ import PageContent from '@/components/page-content'
 import { searchFormConfig } from './config/search.config'
 import { contentTableConfig } from './config/content.config'
 
+import { usePageSearch } from '@/hooks/use-page-search'
+
 export default defineComponent({
   name: 'user',
   components: {
@@ -27,9 +34,13 @@ export default defineComponent({
     PageContent
   },
   setup() {
+    const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
     return {
       searchFormConfig,
-      contentTableConfig
+      contentTableConfig,
+      pageContentRef,
+      handleResetClick,
+      handleQueryClick
     }
   }
 })

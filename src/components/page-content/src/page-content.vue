@@ -1,11 +1,16 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-16 14:36:27
- * @LastEditTime: 2022-08-16 20:48:38
+ * @LastEditTime: 2022-08-17 00:42:45
 -->
 <template>
   <div class="content">
-    <my-table :listData="dataList" v-bind="contentTableConfig">
+    <my-table
+      :listData="dataList"
+      :listCount="dataCount"
+      v-bind="contentTableConfig"
+      v-model:page="pageInfo"
+    >
       <template #headerHandler>
         <el-button>新建用户</el-button>
       </template>
@@ -39,7 +44,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import MyTable from '@/base-ui/table'
 import { useStore } from '@/store'
 
@@ -57,24 +62,37 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props, { emit }) {
+  setup(props) {
     const store = useStore()
-    store.dispatch('system/getPageListAction', {
-      pageUrl: props.pageName,
-      queryInfo: {
-        offset: 0,
-        size: 10
-      }
-    })
+    const pageInfo = ref({ currentPage: 0, pageSize: 10 })
+    watch(pageInfo, () => getPageData())
+
+    const getPageData = (queryInfo: any = {}) => {
+      store.dispatch('system/getPageListAction', {
+        pageUrl: props.pageName,
+        queryInfo: {
+          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          size: pageInfo.value.pageSize,
+          ...queryInfo
+        }
+      })
+    }
+    getPageData()
 
     const dataList = computed(() =>
       store.getters[`system/pageListData`](props.pageName)
     )
     const userCount = computed(() => store.state.system.usersCount)
+    const dataCount = computed(() =>
+      store.getters[`system/pageListCount`](props.pageName)
+    )
 
     return {
       dataList,
-      userCount
+      userCount,
+      getPageData,
+      dataCount,
+      pageInfo
     }
   }
 })

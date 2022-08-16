@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-14 23:03:02
- * @LastEditTime: 2022-08-15 19:02:10
+ * @LastEditTime: 2022-08-16 22:03:27
  */
 import { IForm } from '@/base-ui/form'
 
@@ -24,19 +24,25 @@ export const searchFormConfig: IForm = {
       placeholder: '请输入用户名'
     },
     {
-      field: 'password',
-      type: 'password',
-      label: '密码',
-      placeholder: '请输入密码'
+      field: 'realname',
+      type: 'input',
+      label: '真实姓名',
+      placeholder: '请输入真实姓名'
     },
     {
-      field: 'sport',
+      field: 'cellphone',
+      type: 'input',
+      label: '电话号码',
+      placeholder: '请输入电话号码'
+    },
+    {
+      field: 'enable',
       type: 'select',
-      label: '喜欢的运动',
-      placeholder: '请选择喜欢的运动',
+      label: '用户状态',
+      placeholder: '请选择用户状态',
       options: [
-        { title: '篮球', value: '篮球' },
-        { title: '足球', value: '足球' }
+        { title: '启用', value: '启用' },
+        { title: '禁用', value: '禁用' }
       ]
     },
     {

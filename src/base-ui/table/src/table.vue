@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 23:16:44
- * @LastEditTime: 2022-08-16 13:35:04
+ * @LastEditTime: 2022-08-17 00:40:38
 -->
 <template>
   <div class="my-table">
@@ -46,14 +46,14 @@
       <slot name="footer">
         <div class="el-pagination">
           <el-pagination
-            v-model:currentPage="currentPage4"
-            v-model:page-size="pageSize4"
-            :page-sizes="[100, 200, 300, 400]"
+            :currentPage="page.currentPage"
+            :page-size="page.pageSize"
+            :page-sizes="[10, 20, 30]"
             small="false"
             :disabled="disabled"
             :background="background"
             layout="total, sizes, prev, pager, next, jumper"
-            :total="400"
+            :total="listCount"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
           />
@@ -76,6 +76,10 @@ export default defineComponent({
       type: Array,
       required: true
     },
+    listCount: {
+      type: Number,
+      default: 0
+    },
     propList: {
       type: Array as PropType<ITabelTitle[]>,
       required: true
@@ -87,29 +91,31 @@ export default defineComponent({
     showSelectColumn: {
       type: Boolean,
       default: false
+    },
+    page: {
+      type: Object,
+      default: () => ({ currentPage: 0, pageSize: 10 })
     }
   },
-  emits: ['selectionChange'],
+  emits: ['selectionChange', 'update:page'],
   setup(props, { emit }) {
     const handleSelectChange = (value: any) => {
       emit('selectionChange', value)
     }
 
     const currentPage4 = ref(4)
-    const pageSize4 = ref(100)
     const background = ref(false)
     const disabled = ref(false)
 
-    const handleSizeChange = (val: number) => {
-      console.log(`${val} items per page`)
+    const handleSizeChange = (currentPage: number) => {
+      emit('update:page', { ...props.page, currentPage })
     }
-    const handleCurrentChange = (val: number) => {
-      console.log(`current page: ${val}`)
+    const handleCurrentChange = (pageSize: number) => {
+      emit('update:page', { ...props.page, pageSize })
     }
     return {
       handleSelectChange,
       currentPage4,
-      pageSize4,
       background,
       disabled,
       handleSizeChange,

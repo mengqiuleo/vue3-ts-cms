@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-08-16 20:52:47
+ * @LastEditTime: 2022-08-17 00:23:55
  */
 import { IRootState } from '@/store/type'
 import { Module } from 'vuex'
@@ -36,12 +36,11 @@ const systemModule: Module<ISystemState, IRootState> = {
     pageListData(state) {
       return (pageName: string) => {
         return (state as any)[`${pageName}List`]
-        // switch (pageName) {
-        //   case 'users':
-        //     return state.usersList
-        //   case 'role':
-        //     return state.roleList
-        // }
+      }
+    },
+    pageListCount(state) {
+      return (pageName: string) => {
+        return (state as any)[`${pageName}Count`]
       }
     }
   },
