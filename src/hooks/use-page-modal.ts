@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-17 20:25:31
- * @LastEditTime: 2022-08-17 21:54:45
+ * @LastEditTime: 2022-08-18 02:40:10
  */
 import PageModal from '@/components/page-modal'
 import { ref } from 'vue'
@@ -23,7 +23,7 @@ export function usePageModal(newCb?: CallbackFn, editCb?: CallbackFn) {
     if (pageModalRef.value) {
       pageModalRef.value.dialogVisible = true
     }
-    editCb && editCb()
+    editCb && editCb(item)
   }
 
   return [pageModalRef, defaultInfo, handleNewData, handleEditData]

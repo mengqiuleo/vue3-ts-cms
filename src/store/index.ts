@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:33:45
- * @LastEditTime: 2022-08-17 22:29:00
+ * @LastEditTime: 2022-08-18 02:20:50
  */
 import { createStore, Store, useStore as useVuexStore } from 'vuex'
 import { IRootState, IStoreType } from './type'
@@ -15,7 +15,8 @@ const store = createStore<IRootState>({
       name: 'Pan',
       age: 18,
       entireDepartment: [],
-      entireRole: []
+      entireRole: [],
+      entireMenu: []
     }
   },
   mutations: {
@@ -24,6 +25,9 @@ const store = createStore<IRootState>({
     },
     changeEntireRole(state, list) {
       state.entireRole = list
+    },
+    changeEntireMenu(state, list) {
+      state.entireMenu = list
     }
   },
   actions: {
@@ -38,9 +42,12 @@ const store = createStore<IRootState>({
         size: 1000
       })
       const { list: roleList } = roleResult.data
+      const menuResult = await getPageListData('/menu/list', {})
+      const { list: menuList } = menuResult.data
 
       commit('changeEntireDepartment', departmentList)
       commit('changeEntireRole', roleList)
+      commit('changeEntireMenu', menuList)
     }
   },
   modules: {
@@ -52,7 +59,7 @@ const store = createStore<IRootState>({
 // 解决刷新问题，初始化 vuex
 export function setupStore() {
   store.dispatch('login/loadLocalLogin')
-  store.dispatch('getInitialDataAction')
+  //store.dispatch('getInitialDataAction')
 }
 
 export function useStore(): Store<IStoreType> {

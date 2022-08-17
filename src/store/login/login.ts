@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-26 10:07:29
- * @LastEditTime: 2022-08-17 14:58:45
+ * @LastEditTime: 2022-08-18 01:57:10
  */
 import { Module } from 'vuex'
 
@@ -56,7 +56,7 @@ const loginModule: Module<ILoginState, IRootState> = {
     }
   },
   actions: {
-    async accountLoginAction({ commit }, payload: IAccount) {
+    async accountLoginAction({ commit, dispatch }, payload: IAccount) {
       //console.log('执行store的异步action去登录', payload)
       // 1.实现登录逻辑
       const loginResult = await accountLoginRequest(payload)
@@ -65,6 +65,9 @@ const loginModule: Module<ILoginState, IRootState> = {
       const { token, id } = loginResult.data
       commit('changeToken', token)
       localCache.setCache('token', token)
+
+      // 发起初始化请求(完整的role/department)
+      dispatch('getInitialDataAction', null, { root: true })
 
       // 2.请求用户信息
       const userInfoResult = await requestUserInfoById(id)
@@ -84,10 +87,13 @@ const loginModule: Module<ILoginState, IRootState> = {
       router.push('/main')
     },
     // 每次首次运行代码时，加载下vuex
-    loadLocalLogin({ commit }) {
+    loadLocalLogin({ commit, dispatch }) {
       const token = localCache.getCache('token')
       if (token) {
         commit('changeToken', token)
+
+        // 发起初始化请求(完整的role/department)
+        dispatch('getInitialDataAction', null, { root: true })
       }
       const userInfo = localCache.getCache('userInfo')
       if (userInfo) {

@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-08-18 01:35:24
+ * @LastEditTime: 2022-08-18 01:46:56
  */
 import { IRootState } from '@/store/type'
 import { Module } from 'vuex'
@@ -69,7 +69,12 @@ const systemModule: Module<ISystemState, IRootState> = {
     async getPageListAction({ commit }, payload: any) {
       // 1.获取pageUrl
       console.log('payload', payload)
-      const pageName = payload.pageUrl
+      let pageName = ''
+      if (payload.pageName) {
+        pageName = payload.pageName
+      } else {
+        pageName = payload.pageUrl
+      }
       const pageUrl = `/${pageName}/list`
       // 2.对页面发送请求
       const pageResult = await getPageListData(pageUrl, payload.queryInfo)
@@ -88,6 +93,7 @@ const systemModule: Module<ISystemState, IRootState> = {
       await deletePageData(pageUrl)
       dispatch('getPageListAction', {
         pageName,
+        pageUrl: `/${pageName}/list`,
         queryInfo: {
           offset: 0,
           size: 10
@@ -103,6 +109,7 @@ const systemModule: Module<ISystemState, IRootState> = {
 
       dispatch('getPageListAction', {
         pageName,
+        pageUrl: `/${pageName}/list`,
         queryInfo: {
           offset: 0,
           size: 10
@@ -118,6 +125,7 @@ const systemModule: Module<ISystemState, IRootState> = {
 
       dispatch('getPageListAction', {
         pageName,
+        pageUrl: `/${pageName}/list`,
         queryInfo: {
           offset: 0,
           size: 10
