@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 23:13:32
- * @LastEditTime: 2022-08-15 01:19:47
+ * @LastEditTime: 2022-08-17 14:56:55
  */
 import { IBreadcrumb } from '@/base-ui/breadcrumb'
 import { RouteRecordRaw } from 'vue-router'
@@ -68,6 +68,39 @@ export function pathMapToMenu(
       return menu
     }
   }
+}
+
+export function mapMenuToPermission(userMenus: any[]) {
+  const permissions: string[] = []
+
+  const _recurseGetPermission = (menus: any[]) => {
+    for (const menu of menus) {
+      if (menu.type === 1 || menu.type === 2) {
+        _recurseGetPermission(menu.children ?? [])
+      } else if (menu.type === 3) {
+        permissions.push(menu.permission)
+      }
+    }
+  }
+  _recurseGetPermission(userMenus)
+
+  return permissions
+}
+
+export function menuMapLeafKeys(userMenus: any): any {
+  const leftKeys: number[] = []
+  console.log(userMenus)
+  const _recurseGetMenu = (menus: any): any => {
+    for (const item of menus) {
+      if (item.type === 1) {
+        _recurseGetMenu(item.children ?? [])
+      } else {
+        leftKeys.push(item.id)
+      }
+    }
+  }
+  _recurseGetMenu(userMenus)
+  return leftKeys
 }
 
 export { firstMenu }

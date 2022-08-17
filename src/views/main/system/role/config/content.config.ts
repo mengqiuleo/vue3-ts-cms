@@ -1,10 +1,10 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-16 19:23:41
- * @LastEditTime: 2022-08-16 19:30:36
+ * @LastEditTime: 2022-08-17 14:48:41
  */
 export const contentTableConfig = {
-  title: '用户列表',
+  title: '角色列表',
   propList: [
     { prop: 'name', label: '角色名', minWidth: '12%' },
     { prop: 'intro', label: '权限', minWidth: '10%' },

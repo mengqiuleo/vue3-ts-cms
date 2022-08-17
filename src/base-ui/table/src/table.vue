@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 23:16:44
- * @LastEditTime: 2022-08-17 00:40:38
+ * @LastEditTime: 2022-08-17 14:39:55
 -->
 <template>
   <div class="my-table">
@@ -18,6 +18,9 @@
       border
       class="el-table_body"
       @selection-change="handleSelectChange"
+      row-key="id"
+      v-bind="childrenProps"
+      :tree-props="{ children: 'children' }"
     >
       <el-table-column
         type="selection"
@@ -33,7 +36,7 @@
         align="center"
       />
       <template v-for="propItem in propList" :key="propItem.prop">
-        <el-table-column v-bind="propItem" align="center">
+        <el-table-column v-bind="propItem" align="center" show-overflow-tooltip>
           <template #default="scope">
             <slot :name="propItem.slotName" :row="scope.row">
               {{ scope.row[propItem.prop] }}
@@ -42,16 +45,13 @@
         </el-table-column>
       </template>
     </el-table>
-    <div class="footer">
+    <div class="footer" v-if="showFooter">
       <slot name="footer">
         <div class="el-pagination">
           <el-pagination
-            :currentPage="page.currentPage"
+            :current-page="page.currentPage"
             :page-size="page.pageSize"
-            :page-sizes="[10, 20, 30]"
-            small="false"
-            :disabled="disabled"
-            :background="background"
+            :page-sizes="[10, 20, 30, 50]"
             layout="total, sizes, prev, pager, next, jumper"
             :total="listCount"
             @size-change="handleSizeChange"
@@ -64,7 +64,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType, ref } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import { ITabelTitle } from '../type/type'
 export default defineComponent({
   props: {
@@ -94,7 +94,15 @@ export default defineComponent({
     },
     page: {
       type: Object,
-      default: () => ({ currentPage: 0, pageSize: 10 })
+      default: () => ({ currentPage: 1, pageSize: 10 })
+    },
+    childrenProps: {
+      type: Object,
+      default: () => ({})
+    },
+    showFooter: {
+      type: Boolean,
+      default: true
     }
   },
   emits: ['selectionChange', 'update:page'],
@@ -103,21 +111,14 @@ export default defineComponent({
       emit('selectionChange', value)
     }
 
-    const currentPage4 = ref(4)
-    const background = ref(false)
-    const disabled = ref(false)
-
-    const handleSizeChange = (currentPage: number) => {
+    const handleCurrentChange = (currentPage: number) => {
       emit('update:page', { ...props.page, currentPage })
     }
-    const handleCurrentChange = (pageSize: number) => {
+    const handleSizeChange = (pageSize: number) => {
       emit('update:page', { ...props.page, pageSize })
     }
     return {
       handleSelectChange,
-      currentPage4,
-      background,
-      disabled,
       handleSizeChange,
       handleCurrentChange
     }

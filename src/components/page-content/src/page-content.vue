@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-16 14:36:27
- * @LastEditTime: 2022-08-17 00:42:45
+ * @LastEditTime: 2022-08-17 18:31:58
 -->
 <template>
   <div class="content">
@@ -12,7 +12,7 @@
       v-model:page="pageInfo"
     >
       <template #headerHandler>
-        <el-button>新建用户</el-button>
+        <el-button v-if="isCreate">新建用户</el-button>
       </template>
 
       <template #status="scope">
@@ -29,15 +29,29 @@
       <template #updateAt="scope">
         <span>{{ $filters.formatTime(scope.row.createAt) }}</span>
       </template>
-      <template #handler>
+      <template #handler="scope">
         <div class="handle-btns">
-          <el-button size="small" type="primary" text
+          <el-button v-if="isUpdate" size="small" type="primary" text
             ><el-icon><edit /></el-icon>编辑</el-button
           >
-          <el-button size="small" type="primary" text
+          <el-button
+            v-if="isDelete"
+            size="small"
+            type="primary"
+            text
+            @click="handleDeleteClick(scope.row)"
             ><el-icon><delete /></el-icon>删除</el-button
           >
         </div>
+      </template>
+      <template
+        v-for="item in otherPropSlots"
+        :key="item.prop"
+        #[item.slotName]="scope"
+      >
+        <template v-if="item.slotName">
+          <slot :name="item.slotName" :row="scope.row"></slot>
+        </template>
       </template>
     </my-table>
   </div>
@@ -47,6 +61,7 @@
 import { computed, defineComponent, ref, watch } from 'vue'
 import MyTable from '@/base-ui/table'
 import { useStore } from '@/store'
+import { usePermission } from '@/hooks/use-permission'
 
 export default defineComponent({
   components: {
@@ -64,14 +79,21 @@ export default defineComponent({
   },
   setup(props) {
     const store = useStore()
-    const pageInfo = ref({ currentPage: 0, pageSize: 10 })
+
+    const isCreate = usePermission(props.pageName, 'create')
+    const isUpdate = usePermission(props.pageName, 'update')
+    const isDelete = usePermission(props.pageName, 'delete')
+    const isQuery = usePermission(props.pageName, 'query')
+
+    const pageInfo = ref({ currentPage: 1, pageSize: 10 })
     watch(pageInfo, () => getPageData())
 
     const getPageData = (queryInfo: any = {}) => {
+      if (!isQuery) return
       store.dispatch('system/getPageListAction', {
         pageUrl: props.pageName,
         queryInfo: {
-          offset: pageInfo.value.currentPage * pageInfo.value.pageSize,
+          offset: (pageInfo.value.currentPage - 1) * pageInfo.value.pageSize,
           size: pageInfo.value.pageSize,
           ...queryInfo
         }
@@ -82,17 +104,36 @@ export default defineComponent({
     const dataList = computed(() =>
       store.getters[`system/pageListData`](props.pageName)
     )
-    const userCount = computed(() => store.state.system.usersCount)
     const dataCount = computed(() =>
       store.getters[`system/pageListCount`](props.pageName)
     )
 
+    // 4.获取其他的动态插槽名称
+    const otherPropSlots = props.contentTableConfig.propList.filter(
+      (item: any) => {
+        if (item.slotName === 'status') return false
+        if (item.slotName === 'createAt') return false
+        if (item.slotName === 'updateAt') return false
+        if (item.slotName === 'handler') return false
+        return true
+      }
+    )
+
+    // 5.删除操作
+    const handleDeleteClick = (item: any) => {
+      console.log(item)
+    }
+
     return {
       dataList,
-      userCount,
       getPageData,
       dataCount,
-      pageInfo
+      pageInfo,
+      otherPropSlots,
+      isCreate,
+      isUpdate,
+      isDelete,
+      handleDeleteClick
     }
   }
 })
