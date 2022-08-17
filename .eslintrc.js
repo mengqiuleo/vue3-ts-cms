@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 03:51:07
- * @LastEditTime: 2022-08-15 19:01:36
+ * @LastEditTime: 2022-08-17 21:10:14
  */
 module.exports = {
   root: true,
@@ -25,7 +25,7 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     'vue/multi-word-component-names': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
-    //'vue/no-mutating-props': 'off'
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off'
   }
 }

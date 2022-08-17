@@ -2,7 +2,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-14 11:52:25
- * @LastEditTime: 2022-08-16 22:00:01
+ * @LastEditTime: 2022-08-17 22:05:43
 -->
 <template>
   <div class="my-form">
@@ -15,7 +15,9 @@
           <el-col v-bind="colLayout">
             <el-form-item
               :label="item.label"
-              :rules="item.rules"
+              :rules="item.rules ?? []"
+              :prop="item.field"
+              v-if="!item.isHidden"
               :style="itemLayout"
             >
               <template

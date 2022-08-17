@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-16 14:36:27
- * @LastEditTime: 2022-08-17 18:31:58
+ * @LastEditTime: 2022-08-17 19:42:39
 -->
 <template>
   <div class="content">
@@ -12,7 +12,7 @@
       v-model:page="pageInfo"
     >
       <template #headerHandler>
-        <el-button v-if="isCreate">新建用户</el-button>
+        <el-button v-if="isCreate" @click="handleNewClick">新建用户</el-button>
       </template>
 
       <template #status="scope">
@@ -31,7 +31,12 @@
       </template>
       <template #handler="scope">
         <div class="handle-btns">
-          <el-button v-if="isUpdate" size="small" type="primary" text
+          <el-button
+            v-if="isUpdate"
+            size="small"
+            type="primary"
+            text
+            @click="handleEditClick(scope.row)"
             ><el-icon><edit /></el-icon>编辑</el-button
           >
           <el-button
@@ -77,7 +82,8 @@ export default defineComponent({
       required: true
     }
   },
-  setup(props) {
+  emits: ['newBtnClick', 'editBtnClick'],
+  setup(props, { emit }) {
     const store = useStore()
 
     const isCreate = usePermission(props.pageName, 'create')
@@ -121,7 +127,18 @@ export default defineComponent({
 
     // 5.删除操作
     const handleDeleteClick = (item: any) => {
-      console.log(item)
+      console.log('删除')
+      store.dispatch('system/deletePageDataAction', {
+        pageName: props.pageName,
+        id: item.id
+      })
+    }
+
+    const handleNewClick = () => {
+      emit('newBtnClick')
+    }
+    const handleEditClick = (item: any) => {
+      emit('editBtnClick', item)
     }
 
     return {
@@ -133,7 +150,9 @@ export default defineComponent({
       isCreate,
       isUpdate,
       isDelete,
-      handleDeleteClick
+      handleDeleteClick,
+      handleNewClick,
+      handleEditClick
     }
   }
 })

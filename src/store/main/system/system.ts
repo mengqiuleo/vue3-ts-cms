@@ -1,12 +1,17 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-08-17 14:35:54
+ * @LastEditTime: 2022-08-18 01:35:24
  */
 import { IRootState } from '@/store/type'
 import { Module } from 'vuex'
 import { ISystemState } from './type'
-import { getPageListData } from '@/service/main/system/system'
+import {
+  getPageListData,
+  deletePageData,
+  createPageData,
+  editPageData
+} from '@/service/main/system/system'
 
 const systemModule: Module<ISystemState, IRootState> = {
   namespaced: true,
@@ -63,16 +68,9 @@ const systemModule: Module<ISystemState, IRootState> = {
   actions: {
     async getPageListAction({ commit }, payload: any) {
       // 1.获取pageUrl
+      console.log('payload', payload)
       const pageName = payload.pageUrl
       const pageUrl = `/${pageName}/list`
-      // switch (pageName) {
-      //   case 'user':
-      //     pageUrl = '/users/list'
-      //     break
-      //   case 'role':
-      //     pageUrl = '/role/list'
-      //     break
-      // }
       // 2.对页面发送请求
       const pageResult = await getPageListData(pageUrl, payload.queryInfo)
 
@@ -82,6 +80,49 @@ const systemModule: Module<ISystemState, IRootState> = {
         pageName.slice(0, 1).toUpperCase() + pageName.slice(1)
       commit(`change${changePageName}List`, list)
       commit(`change${changePageName}Count`, totalCount)
+    },
+
+    async deletePageDataAction({ dispatch }, payload: any) {
+      const { pageName, id } = payload
+      const pageUrl = `/${pageName}/${id}`
+      await deletePageData(pageUrl)
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10
+        }
+      })
+    },
+
+    async createPageDataAction({ dispatch }, payload: any) {
+      const { pageName, newData } = payload
+      const pageUrl = `/${pageName}`
+      console.log('创建url: ', pageUrl)
+      await createPageData(pageUrl, newData)
+
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10
+        }
+      })
+    },
+
+    async editPageDataAction({ dispatch }, payload: any) {
+      const { pageName, editData, id } = payload
+      const pageUrl = `/${pageName}/${id}`
+      console.log('编辑url: ', pageUrl)
+      await editPageData(pageUrl, editData)
+
+      dispatch('getPageListAction', {
+        pageName,
+        queryInfo: {
+          offset: 0,
+          size: 10
+        }
+      })
     }
   }
 }

@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-14 11:58:22
- * @LastEditTime: 2022-08-15 18:57:59
+ * @LastEditTime: 2022-08-17 20:35:37
  */
 type IFormType = 'input' | 'password' | 'select' | 'datepicker'
 
@@ -15,6 +15,7 @@ export interface IFormItem {
   options?: any[]
   // 针对特殊的属性
   otherOptions?: any
+  isHidden?: boolean
 }
 
 export interface IForm {
