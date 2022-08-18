@@ -1,16 +1,16 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 21:13:31
- * @LastEditTime: 2022-08-18 14:05:56
+ * @LastEditTime: 2022-08-18 14:32:57
 -->
 <template>
   <div class="category">
     <PageSearch :searchFormConfig="searchFormConfig" />
-    <page-content
+    <pageContent
       ref="pageContentRef"
       pageName="category"
       :contentTableConfig="contentTableConfig"
-    ></page-content>
+    ></pageContent>
   </div>
 </template>
 

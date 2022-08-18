@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-08-18 14:07:02
+ * @LastEditTime: 2022-08-18 15:39:27
  */
 import { IRootState } from '@/store/type'
 import { Module } from 'vuex'
@@ -28,7 +28,9 @@ const systemModule: Module<ISystemState, IRootState> = {
       departmentCount: 0,
       departmentList: [],
       categoryCount: 0,
-      categoryList: []
+      categoryList: [],
+      storyCount: 0,
+      storyList: []
     }
   },
   mutations: {
@@ -67,6 +69,12 @@ const systemModule: Module<ISystemState, IRootState> = {
     },
     changeCategoryList(state, roleList: any) {
       state.categoryList = roleList
+    },
+    changeStoryCount(state, totalCount: number) {
+      state.storyCount = totalCount
+    },
+    changeStoryList(state, storyList: any) {
+      state.storyList = storyList
     }
   },
   getters: {
@@ -84,7 +92,7 @@ const systemModule: Module<ISystemState, IRootState> = {
   actions: {
     async getPageListAction({ commit }, payload: any) {
       // 1.获取pageUrl
-      console.log('payload', payload)
+      //console.log('payload', payload)
       let pageName = ''
       if (payload.pageName) {
         pageName = payload.pageName
@@ -93,6 +101,7 @@ const systemModule: Module<ISystemState, IRootState> = {
       }
       const pageUrl = `/${pageName}/list`
       // 2.对页面发送请求
+      console.log('发送请求url: ', pageUrl)
       const pageResult = await getPageListData(pageUrl, payload.queryInfo)
 
       // 3.将数据存放到 state 中
