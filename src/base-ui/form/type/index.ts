@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-14 11:58:22
- * @LastEditTime: 2022-08-17 20:35:37
+ * @LastEditTime: 2022-08-18 05:23:38
  */
 type IFormType = 'input' | 'password' | 'select' | 'datepicker'
 
@@ -20,6 +20,7 @@ export interface IFormItem {
 
 export interface IForm {
   formItems: IFormItem[]
+  title?: string
   labelWidth?: string
   colLayout?: any
   itemLayout?: any

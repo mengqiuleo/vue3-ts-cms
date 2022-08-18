@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-08-17 14:35:49
+ * @LastEditTime: 2022-08-18 12:32:27
  */
 export interface ISystemState {
   usersList: any[]
@@ -12,4 +12,6 @@ export interface ISystemState {
   goodsCount: number
   menuList: any[]
   menuCount: number
+  departmentCount: number
+  departmentList: any[]
 }

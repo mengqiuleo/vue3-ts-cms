@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 21:12:18
- * @LastEditTime: 2022-08-17 13:39:23
+ * @LastEditTime: 2022-08-18 13:00:46
 -->
 <template>
   <div class="menu">
@@ -15,7 +15,6 @@ import PageContent from '@/components/page-content'
 import { contentTableConfig } from './config/content.config'
 
 export default defineComponent({
-  name: 'menu',
   components: {
     PageContent
   },

@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 14:14:25
- * @LastEditTime: 2022-08-13 17:55:44
+ * @LastEditTime: 2022-08-18 05:13:13
  */
 import { App } from 'vue'
 import 'element-plus/dist/index.css'
@@ -33,6 +33,7 @@ import {
   ElSelect,
   ElSubMenu,
   ElTabPane,
+  ElTag,
   ElTabs,
   ElBreadcrumb,
   ElBreadcrumbItem,
@@ -45,7 +46,9 @@ import {
   ElDialog,
   ElTree,
   ElCard,
-  ElTooltip
+  ElTooltip,
+  ElDescriptions,
+  ElDescriptionsItem
 } from 'element-plus'
 
 const components = [
@@ -75,6 +78,7 @@ const components = [
   ElSubMenu,
   ElTabPane,
   ElTabs,
+  ElTag,
   ElBreadcrumb,
   ElBreadcrumbItem,
   ElTable,
@@ -86,7 +90,9 @@ const components = [
   ElDialog,
   ElTree,
   ElCard,
-  ElTooltip
+  ElTooltip,
+  ElDescriptions,
+  ElDescriptionsItem
 ]
 
 export default function (app: App): void {
