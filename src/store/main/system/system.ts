@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-08-18 12:34:55
+ * @LastEditTime: 2022-08-18 14:07:02
  */
 import { IRootState } from '@/store/type'
 import { Module } from 'vuex'
@@ -26,7 +26,9 @@ const systemModule: Module<ISystemState, IRootState> = {
       menuList: [],
       menuCount: 0,
       departmentCount: 0,
-      departmentList: []
+      departmentList: [],
+      categoryCount: 0,
+      categoryList: []
     }
   },
   mutations: {
@@ -59,6 +61,12 @@ const systemModule: Module<ISystemState, IRootState> = {
     },
     changeDepartmentList(state, departmentList: any) {
       state.departmentList = departmentList
+    },
+    changeCategoryCount(state, totalCount: number) {
+      state.categoryCount = totalCount
+    },
+    changeCategoryList(state, roleList: any) {
+      state.categoryList = roleList
     }
   },
   getters: {
