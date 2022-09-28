@@ -1,10 +1,12 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 21:15:16
- * @LastEditTime: 2022-08-18 15:52:11
+ * @LastEditTime: 2022-09-27 20:34:49
 -->
 <template>
-  <div>chat</div>
+  <div>
+    <img src="../../../../assets/img/背景.jpg" alt="" />
+  </div>
 </template>
 
 <script lang="ts">
@@ -15,4 +17,12 @@ export default defineComponent({
   }
 })
 </script>
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+img {
+  display: block;
+  outline: none;
+  border: 0;
+  height: 100%;
+  width: 100%;
+}
+</style>

@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 03:51:07
- * @LastEditTime: 2022-08-16 06:11:42
+ * @LastEditTime: 2022-09-28 18:48:16
  */
 /* eslint-disable */
 // export {}
@@ -20,6 +20,7 @@ declare module '*.vue' {
 
 declare let $filters: any
 declare const VUE_APP_BASE_URL: string
+declare module '*.json'
 
 // declare module '@vue/runtime-core' {
 //   export interface ComponentCustomProperties {

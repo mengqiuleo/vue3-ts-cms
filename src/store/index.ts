@@ -1,13 +1,14 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:33:45
- * @LastEditTime: 2022-08-18 02:20:50
+ * @LastEditTime: 2022-09-28 08:06:44
  */
 import { createStore, Store, useStore as useVuexStore } from 'vuex'
 import { IRootState, IStoreType } from './type'
 import system from './main/system/system'
 import login from './login/login'
 import { getPageListData } from '@/service/main/system/system'
+import dashboard from './main/analysis/dashboard'
 
 const store = createStore<IRootState>({
   state() {
@@ -52,7 +53,8 @@ const store = createStore<IRootState>({
   },
   modules: {
     login,
-    system
+    system,
+    dashboard
   }
 })
 
