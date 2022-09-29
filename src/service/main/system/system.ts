@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 22:16:15
- * @LastEditTime: 2022-08-17 23:00:32
+ * @LastEditTime: 2022-09-29 17:29:44
  */
 import myRequest from '@/service'
 import { IDataType } from '../../type'
@@ -9,7 +9,16 @@ import { IDataType } from '../../type'
 export function getPageListData(url: string, queryInfo: any) {
   return myRequest.post<IDataType>({
     url: url,
-    data: queryInfo
+    data: queryInfo,
+    // # 这里就是针对一个实例的某个接口的拦截器
+    interceptors: {
+      requestInterceptor: (config: any) => {
+        return config
+      },
+      responseInterceptor: (err: any) => {
+        return err
+      }
+    }
   })
 }
 

@@ -1,10 +1,11 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-06-24 22:36:11
- * @LastEditTime: 2022-08-13 02:16:16
+ * @LastEditTime: 2022-09-29 18:47:19
 -->
 <template>
   <div class="login-account">
+    <!-- 这里的rules是用来验证规则，account用来记录传入的绑定的账号密码的变量-->
     <el-form label-width="55px" :rules="rules" :model="account" ref="formRef">
       <el-form-item label="账号" prop="name">
         <el-input
@@ -13,6 +14,7 @@
           class="input-class"
         />
       </el-form-item>
+      <!-- prop用来帮助验证规则匹配是账号还是密码的验证规则 -->
       <el-form-item label="密码" prop="password">
         <el-input
           v-model="account.password"
@@ -36,14 +38,18 @@ import localCache from '@/utils/cache'
 export default defineComponent({
   setup() {
     const store = useStore()
+    // 账号相关
     const account = reactive({
       name: localCache.getCache('name') ?? '',
       password: localCache.getCache('password') ?? ''
     })
+    // 获取整个表单(账号和密码)，一会儿用来验证规则
     const formRef = ref<InstanceType<typeof ElForm>>()
 
+    // 这个登录的函数会导出，在 login-panel组件中调用(通过ref来绑定当前组件使用)
     const loginAction = (isKeepPassword: boolean) => {
       console.log('里面小组件收到消息，开始登录')
+      // validate属性是组件自带的，判断账号密码通过后，会返回true(否则为false)
       formRef.value?.validate((valid) => {
         if (valid) {
           console.log('表单验证通过，真正执行登录逻辑')

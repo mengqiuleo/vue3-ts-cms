@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:33:45
- * @LastEditTime: 2022-09-28 08:06:44
+ * @LastEditTime: 2022-09-29 19:46:04
  */
 import { createStore, Store, useStore as useVuexStore } from 'vuex'
 import { IRootState, IStoreType } from './type'
@@ -58,7 +58,7 @@ const store = createStore<IRootState>({
   }
 })
 
-// 解决刷新问题，初始化 vuex
+//# 解决刷新问题，初始化 vuex
 export function setupStore() {
   store.dispatch('login/loadLocalLogin')
   //store.dispatch('getInitialDataAction')

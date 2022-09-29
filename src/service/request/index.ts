@@ -8,7 +8,7 @@ import { LoadingInstance } from 'element-plus/es/components/loading/src/loading'
 const DEFAULT_LOADING = true
 
 class MYRequest {
-  instance: AxiosInstance //一个属性，用来存放我们传入的配置
+  instance: AxiosInstance //一个属性(这个属性就是axios身上自带的)，用来存放我们传入的配置
   interceptors?: MYRequestInterceptors
   showLoading: boolean
   loading?: LoadingInstance
@@ -75,10 +75,10 @@ class MYRequest {
   }
 
   // 封装的这个request方法可以让我们传入请求的方式，那么下面封装真正的get,post,patch...方法就会便捷很多
-  // 上面的拦截器只是定义，下面才是真正的使用
   request<T = any>(config: MYRequestConfig): Promise<T> {
     return new Promise((resolve, reject) => {
-      // 每个请求自己的拦截器
+      //# 如果某个实例的某个请求有拦截器，那就先调一下这个实例的针对这个请求的拦截器(这里是请求拦截器)
+      // 针对某个实例的某个接口有拦截器的例子放在最下面
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config)
       }
@@ -91,7 +91,7 @@ class MYRequest {
       this.instance //this.instance 其实是根据我们传入的配置创造出来的一个axios实例
         .request<any, T>(config)
         .then((res) => {
-          // 每个请求自己的拦截器
+          //# 每个实例针对某个接口的响应拦截器(响应拦截器)
           if (config.interceptors?.responseInterceptor) {
             res = config.interceptors.responseInterceptor(res)
           }
@@ -123,3 +123,22 @@ class MYRequest {
 }
 
 export default MYRequest
+
+/**
+ * 针对一个实例的某个接口有一个拦截器
+ */
+/*
+myRequest.post<IDataType>({
+    url: url,
+    data: queryInfo,
+     # 这里就是针对一个实例的某个接口的拦截器
+    interceptors: {
+      requestInterceptor: (config: any) => {
+        return config
+      },
+      responseInterceptor: (err: any) => {
+        return err
+      }
+    }
+  })
+*/

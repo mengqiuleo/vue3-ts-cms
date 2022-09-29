@@ -1,3 +1,12 @@
+/*
+ * @Author: Pan Jingyi
+ * @Date: 2022-06-25 15:49:22
+ * @LastEditTime: 2022-09-29 18:52:19
+ */
+/**
+ * 使用localStorage进行本地缓存
+ */
+
 class LocalCache {
   setCache(key: string, value: any) {
     window.localStorage.setItem(key, JSON.stringify(value))
