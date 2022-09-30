@@ -1,15 +1,21 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 23:13:32
- * @LastEditTime: 2022-08-18 02:48:09
+ * @LastEditTime: 2022-09-30 08:54:56
  */
 import { IBreadcrumb } from '@/base-ui/breadcrumb'
 import { RouteRecordRaw } from 'vue-router'
 
 let firstMenu: any = null
 
+/**
+ * 将后端菜单数据转换成前端好用的路由数组
+ * @param userMenus：该参数是我们传入的当前用户所拥有的的菜单
+ * @returns
+ */
 export function handleUserMenu(userMenus: any): RouteRecordRaw[] {
-  // 1.定义所有路由存储
+  // 1.定义所有路由存储，这里的所有路由指的是前端我们定义的所有页面的路由
+  // 然后我们会从这个 所有路由的数组中进行筛选，最后返回该用户可以拥有的路由
   const allRoutes: RouteRecordRaw[] = []
 
   // 2.遍历所有路由
@@ -19,9 +25,9 @@ export function handleUserMenu(userMenus: any): RouteRecordRaw[] {
     const routePath = require('../router/main' + element.split('.')[1])
     allRoutes.push(routePath.default)
   })
-  //console.log(allRoutes, 'allRoutes')
+  console.log('allRoutes: ', allRoutes)
 
-  // 3.定义返回值数组
+  // 3.定义返回的路由数组
   const routes: RouteRecordRaw[] = []
 
   // 4.定义递归数组方法

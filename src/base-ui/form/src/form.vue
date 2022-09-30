@@ -2,17 +2,20 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-14 11:52:25
- * @LastEditTime: 2022-08-17 22:05:43
+ * @LastEditTime: 2022-09-30 15:32:52
 -->
 <template>
   <div class="my-form">
     <div class="header">
+      <!-- 这里设置插槽，名字为header，那么到时候引用的时候就是template #header -->
       <slot name="header"></slot>
     </div>
     <el-form :label-width="labelWidth">
       <el-row>
         <template v-for="item in formItems" :key="item.label">
           <el-col v-bind="colLayout">
+            <!-- el-form-item 相当于每一项,里面的三个template只能三选一 -->
+            <!-- label是指这个东西叫什么名字，比如叫：id,用户名，用户状态，创建时间... -->
             <el-form-item
               :label="item.label"
               :rules="item.rules ?? []"
@@ -32,6 +35,7 @@
                 />
               </template>
               <template v-else-if="item.type === 'select'">
+                <!-- 如果是下拉选择框 -->
                 <el-select
                   :placeholder="item.placeholder"
                   style="width: 100%"
@@ -39,6 +43,7 @@
                   @update:modelValue="handleValueChange($event, item.field)"
                   v-bind="item.otherOptions"
                 >
+                  <!-- 上面的otherOptions是针对于日历选择框的 -->
                   <el-option
                     v-for="option in item.options"
                     :key="option.value"
@@ -48,6 +53,7 @@
                 </el-select>
               </template>
               <template v-else-if="item.type === 'datepicker'">
+                <!-- v-bind可以实现将一些属性不管啥样的都绑定到组件上面 -->
                 <el-date-picker
                   style="width: 100%"
                   v-bind="item.otherOptions"
@@ -76,14 +82,17 @@ export default defineComponent({
       type: Object,
       required: true
     },
+    // 每个搜索框的相关信息
     formItems: {
       type: Array as PropType<IFormItem[]>,
       default: () => []
     },
+    // 每个搜索框的长度
     labelWidth: {
       type: String,
       default: '100px'
     },
+    // 整个搜索页面的每个搜索框都有的样式
     itemLayout: {
       type: Object,
       default: () => ({ padding: '10px 40px' })

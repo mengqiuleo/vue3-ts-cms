@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 20:28:01
- * @LastEditTime: 2022-08-16 23:55:07
+ * @LastEditTime: 2022-09-30 15:10:41
 -->
 <template>
   <my-form v-bind="searchFormConfig" v-model="formData">
@@ -41,12 +41,12 @@ export default defineComponent({
   setup(props, { emit }) {
     // 双向绑定的属性是由配置文件的field来决定
     // 1.优化一：formData中的属性应该动态来决定
-    const formItems = props.searchFormConfig.formItem ?? []
+    const formItems = props.searchFormConfig.formItem ?? [] //formItems是从父组件收过来的各个选项值
     const formOriginData = {}
     for (const item of formItems) {
       formOriginData[item.field] = ''
     }
-    const formData = ref(formOriginData)
+    const formData = ref(formOriginData) //formData是我们传给子组件的值
 
     // 2.重置按钮
     const handleResetClick = () => {
