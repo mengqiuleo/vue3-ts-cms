@@ -1,9 +1,10 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 20:28:01
- * @LastEditTime: 2022-09-30 15:10:41
+ * @LastEditTime: 2022-09-30 20:23:53
 -->
 <template>
+  <!-- 通过v-model实现组件之间的数据双向绑定：并且传给子组件的值叫：modelValue，并不叫formData -->
   <my-form v-bind="searchFormConfig" v-model="formData">
     <template #header>
       <h3>高级检索</h3>

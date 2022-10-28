@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 20:13:59
- * @LastEditTime: 2022-08-15 01:18:36
+ * @LastEditTime: 2022-09-30 19:54:43
 -->
 <template>
   <div class="nav-header">
@@ -35,11 +35,11 @@ export default defineComponent({
   setup(props, { emit }) {
     const isFold = ref(false)
     const store = useStore()
-    const userMenus = computed(() => store.state.login.userMenus)
+    const userMenus = computed(() => store.state.login.userMenus) //用户全部路由信息表
     const breadList = computed(() => {
       const route = useRoute()
-      const currentPath = route.path
-      const useBreadList = pathMapBreadcrumbs(userMenus.value, currentPath)
+      const currentPath = route.path //当前路径
+      const useBreadList = pathMapBreadcrumbs(userMenus.value, currentPath) //拿到面包屑的数据
       return useBreadList
     })
 

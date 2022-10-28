@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 17:35:38
- * @LastEditTime: 2022-09-30 16:07:13
+ * @LastEditTime: 2022-09-30 19:11:09
 -->
 <template>
   <div class="nav-menu">
@@ -84,8 +84,19 @@ export default defineComponent({
 
     // 这里是实现：选中我们点击的菜单
     const currentPath = route.path
+    console.log('currentPath: ', currentPath)
+    console.log('userMenus.value: ', userMenus.value)
     const menu = pathMapToMenu(userMenus.value, currentPath)
     const defaultValue = ref(menu.id + '') //我们点击选中的菜单id
+    console.log('menu: ', menu)
+    console.log('menu.id: ', menu.id)
+    // 上面具体的例子(打印结果)
+    /**
+     * currentPath:  /main/story/chat
+     * userMenus.value: 里面是菜单，每个具体的路由有自己的id,name,url
+     * 我们需要用路径匹配(路径与路径匹配)，拿到当前菜单的全部信息，然后拿出id(就是menu.id)
+     * 然后设置为默认值
+     */
 
     const getIcon = (icons: string) => {
       if (icons && icons.indexOf('el-icon') !== -1) {

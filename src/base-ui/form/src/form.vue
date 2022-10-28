@@ -2,7 +2,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-14 11:52:25
- * @LastEditTime: 2022-09-30 15:32:52
+ * @LastEditTime: 2022-09-30 20:25:18
 -->
 <template>
   <div class="my-form">
@@ -54,6 +54,7 @@
               </template>
               <template v-else-if="item.type === 'datepicker'">
                 <!-- v-bind可以实现将一些属性不管啥样的都绑定到组件上面 -->
+                <!-- model-value 用来实现双向数据绑定:因为传了这么多值,我们怎么知道哪个对应哪个空 -->
                 <el-date-picker
                   style="width: 100%"
                   v-bind="item.otherOptions"
@@ -78,6 +79,8 @@ import { IFormItem } from '../type'
 
 export default defineComponent({
   props: {
+    // 通过v-model实现组件之间的数据双向绑定：并且传给子组件的值叫：modelValue，并不叫formData
+    // 可以去父组件看一下，使用过v-model进行绑定的，并且绑定的值就是formData, 但是这里要叫modelValue
     modelValue: {
       type: Object,
       required: true

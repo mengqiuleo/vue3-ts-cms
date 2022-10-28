@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-14 23:03:02
- * @LastEditTime: 2022-08-16 22:03:27
+ * @LastEditTime: 2022-09-30 20:06:15
  */
 import { IForm } from '@/base-ui/form'
 
@@ -12,6 +12,7 @@ export const searchFormConfig: IForm = {
   },
   formItems: [
     {
+      // 双向绑定的属性是由配置文件的field来决定
       field: 'id',
       type: 'input',
       label: 'id',

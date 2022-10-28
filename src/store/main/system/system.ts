@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-08-18 15:39:27
+ * @LastEditTime: 2022-10-01 08:19:33
  */
 import { IRootState } from '@/store/type'
 import { Module } from 'vuex'
@@ -90,6 +90,7 @@ const systemModule: Module<ISystemState, IRootState> = {
     }
   },
   actions: {
+    // 获取列表数据，并存储在 store中
     async getPageListAction({ commit }, payload: any) {
       // 1.获取pageUrl
       //console.log('payload', payload)
@@ -116,6 +117,7 @@ const systemModule: Module<ISystemState, IRootState> = {
       const { pageName, id } = payload
       const pageUrl = `/${pageName}/${id}`
       await deletePageData(pageUrl)
+      // dispatch：执行actions
       dispatch('getPageListAction', {
         pageName,
         pageUrl: `/${pageName}/list`,

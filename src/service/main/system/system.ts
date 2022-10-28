@@ -1,11 +1,12 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 22:16:15
- * @LastEditTime: 2022-09-29 17:29:44
+ * @LastEditTime: 2022-10-01 08:14:26
  */
 import myRequest from '@/service'
 import { IDataType } from '../../type'
 
+// 发送网络请求：获取列表数据
 export function getPageListData(url: string, queryInfo: any) {
   return myRequest.post<IDataType>({
     url: url,

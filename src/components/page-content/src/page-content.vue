@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-16 14:36:27
- * @LastEditTime: 2022-08-17 19:42:39
+ * @LastEditTime: 2022-10-01 09:19:25
 -->
 <template>
   <div class="content">
@@ -14,7 +14,7 @@
       <template #headerHandler>
         <el-button v-if="isCreate" @click="handleNewClick">新建用户</el-button>
       </template>
-
+      <!-- 显示按钮插槽 -->
       <template #status="scope">
         <el-button
           plain
@@ -23,12 +23,14 @@
           >{{ scope.row.enable ? '启用' : '禁用' }}</el-button
         >
       </template>
+      <!-- 创建及更新时间 -->
       <template #createAt="scope">
         <span>{{ $filters.formatTime(scope.row.createAt) }}</span>
       </template>
       <template #updateAt="scope">
-        <span>{{ $filters.formatTime(scope.row.createAt) }}</span>
+        <span>{{ $filters.formatTime(scope.row.updateAt) }}</span>
       </template>
+      <!-- 编辑删除操作 -->
       <template #handler="scope">
         <div class="handle-btns">
           <el-button
@@ -107,6 +109,7 @@ export default defineComponent({
     }
     getPageData()
 
+    // 从getter中获取数据
     const dataList = computed(() =>
       store.getters[`system/pageListData`](props.pageName)
     )
