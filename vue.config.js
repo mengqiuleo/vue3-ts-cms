@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-10-29 20:26:00
+ * @LastEditTime: 2022-10-29 21:01:58
  */
 const path = require('path')
 
@@ -43,7 +43,7 @@ module.exports = {
         assets: '@/assets'
       }
     }
-  },
-  publicPath: './', // 注意 这里使用 /  如果不行的话  就 ./
-  assetsDir: 'static'
+  }
+  // publicPath: './', // 注意 这里使用 /  如果不行的话  就 ./
+  // assetsDir: 'static'
 }
