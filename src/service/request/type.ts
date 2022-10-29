@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 18:27:43
- * @LastEditTime: 2022-08-13 00:50:23
+ * @LastEditTime: 2022-10-28 10:02:36
  */
 import type { AxiosRequestConfig } from 'axios'
 
@@ -15,4 +15,8 @@ export interface MYRequestInterceptors {
 export interface MYRequestConfig extends AxiosRequestConfig {
   interceptors?: MYRequestInterceptors
   showLoading?: boolean
+}
+
+export interface CancelRequestSource {
+  [index: string]: () => void
 }

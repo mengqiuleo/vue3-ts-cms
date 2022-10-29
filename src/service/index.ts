@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 15:35:12
- * @LastEditTime: 2022-09-29 17:22:24
+ * @LastEditTime: 2022-10-28 10:14:06
  */
 import MYRequest from './request'
 import { BASE_URL, TIME_OUT } from './request/config'
@@ -35,5 +35,14 @@ const myRequest = new MYRequest({
     }
   }
 })
+
+// 取消请求
+export const cancelRequest = (url: string | string[]) => {
+  return myRequest.cancelRequest(url)
+}
+// 取消全部请求
+export const cancelAllRequest = () => {
+  return myRequest.cancelAllRequest()
+}
 
 export default myRequest

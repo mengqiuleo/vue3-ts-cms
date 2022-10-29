@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 23:13:32
- * @LastEditTime: 2022-09-30 19:54:21
+ * @LastEditTime: 2022-10-28 13:35:35
  */
 import { IBreadcrumb } from '@/base-ui/breadcrumb'
 import { RouteRecordRaw } from 'vue-router'
@@ -19,7 +19,7 @@ export function handleUserMenu(userMenus: any): RouteRecordRaw[] {
   // 然后我们会从这个 所有路由的数组中进行筛选，最后返回该用户可以拥有的路由
   const allRoutes: RouteRecordRaw[] = []
 
-  // 2.遍历所有路由
+  // 2.遍历所有路由：我们的公共路由是放在router文件夹下的index.ts文件中，而动态路由是放在每个其他文件夹的ts文件下
   const routeFiles = require.context('../router/main', true, /\.ts$/)
   //console.log(routeFiles)
   routeFiles.keys().forEach((element) => {

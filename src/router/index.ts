@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:16:16
- * @LastEditTime: 2022-09-30 19:02:59
+ * @LastEditTime: 2022-10-28 10:53:00
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
@@ -39,7 +39,7 @@ router.beforeEach((to) => {
   if (to.path !== '/login') {
     const token = localCache.getCache('token')
     if (!token) {
-      return '/login'
+      return '/login' //#这里是没有token：重定向到登录页，而不是token过期重定向
     }
   }
 
