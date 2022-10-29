@@ -1,12 +1,12 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-10-29 12:49:01
+ * @LastEditTime: 2022-10-29 18:20:11
  */
 const path = require('path')
 
 module.exports = {
-  outputDir: './build',
+  outputDir: './dist',
   devServer: {
     proxy: {
       '^/api': {
