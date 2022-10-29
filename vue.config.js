@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-10-29 18:20:11
+ * @LastEditTime: 2022-10-29 20:26:00
  */
 const path = require('path')
 
@@ -27,10 +27,23 @@ module.exports = {
   // },
 
   // # 方式二：
-  configureWebpack: (config) => {
-    config.resolve.alias = {
-      '@': path.resolve(__dirname, 'src'),
-      components: '@/components'
+  // configureWebpack: (config) => {
+  //   config.resolve.alias = {
+  //     '@': path.resolve(__dirname, 'src'),
+  //     components: '@/components'
+  //   }
+  // },
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'src'),
+        view: '@/view',
+        router: '@/router',
+        components: '@/components',
+        assets: '@/assets'
+      }
     }
-  }
+  },
+  publicPath: './', // 注意 这里使用 /  如果不行的话  就 ./
+  assetsDir: 'static'
 }
