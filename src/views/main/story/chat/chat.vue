@@ -32,13 +32,13 @@ export default defineComponent({
         title: title.value!,
         cotent: editRef.value!.content.html
       })
-        .then((_) => {
+        .then(() => {
           ElMessage.success({
             message: '文章发布成功',
             type: 'success'
           })
         })
-        .catch((_) => {
+        .catch(() => {
           ElMessage.error('文章发布失败')
         })
     }
