@@ -1,28 +1,65 @@
-<!--
- * @Author: Pan Jingyi
- * @Date: 2022-08-13 21:15:16
- * @LastEditTime: 2022-09-27 20:34:49
--->
 <template>
-  <div>
-    <img src="../../../../assets/img/背景.jpg" alt="" />
+  <div class="chat">
+    <div class="header">
+      <el-input
+        style="width: 300px"
+        v-model="title"
+        placeholder="请输入文章标题"
+      ></el-input>
+      <el-button @click="publishArticlesClic">发布文章</el-button>
+    </div>
+    <div class="content">
+      <MyEditor ref="editRef"></MyEditor>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref } from 'vue'
+
+import MyEditor from '@/base-ui/editor/src/index.vue'
+import { ElMessage } from 'element-plus'
+
+import { publishArticlesData } from '@/service/main/story'
 export default defineComponent({
+  name: 'chat',
+  components: { MyEditor },
   setup() {
-    return {}
+    const editRef = ref<InstanceType<typeof MyEditor>>()
+    const title = ref<string>()
+    const publishArticlesClic = () => {
+      publishArticlesData({
+        title: title.value!,
+        cotent: editRef.value!.content.html
+      })
+        .then((_) => {
+          ElMessage.success({
+            message: '文章发布成功',
+            type: 'success'
+          })
+        })
+        .catch((_) => {
+          ElMessage.error('文章发布失败')
+        })
+    }
+    return { editRef, publishArticlesClic, title }
   }
 })
 </script>
+
 <style lang="less" scoped>
-img {
-  display: block;
-  outline: none;
-  border: 0;
-  height: 100%;
-  width: 100%;
+.chat {
+  height: 580px;
+  display: flex;
+  flex-direction: column;
+  .header {
+    text-align: right;
+    height: 40px;
+    padding-top: 8px;
+    padding-left: 15px;
+  }
+  .content {
+    height: 500px;
+  }
 }
 </style>

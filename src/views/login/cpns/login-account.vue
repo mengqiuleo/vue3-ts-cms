@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-06-24 22:36:11
- * @LastEditTime: 2022-09-29 18:47:19
+ * @LastEditTime: 2022-10-30 12:25:54
 -->
 <template>
   <div class="login-account">
@@ -40,8 +40,8 @@ export default defineComponent({
     const store = useStore()
     // 账号相关
     const account = reactive({
-      name: localCache.getCache('name') ?? '',
-      password: localCache.getCache('password') ?? ''
+      name: localCache.getCache('name') ?? 'coderwhy',
+      password: localCache.getCache('password') ?? '123456'
     })
     // 获取整个表单(账号和密码)，一会儿用来验证规则
     const formRef = ref<InstanceType<typeof ElForm>>()

@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-10-01 08:19:33
+ * @LastEditTime: 2022-10-30 18:18:24
  */
 import { IRootState } from '@/store/type'
 import { Module } from 'vuex'
@@ -105,10 +105,12 @@ const systemModule: Module<ISystemState, IRootState> = {
       console.log('发送请求url: ', pageUrl)
       const pageResult = await getPageListData(pageUrl, payload.queryInfo)
 
+      console.log('请求结果：', pageResult)
       // 3.将数据存放到 state 中
       const { list, totalCount } = pageResult.data
       const changePageName =
         pageName.slice(0, 1).toUpperCase() + pageName.slice(1)
+      console.log('changePageName: ', changePageName)
       commit(`change${changePageName}List`, list)
       commit(`change${changePageName}Count`, totalCount)
     },

@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-18 14:15:35
- * @LastEditTime: 2022-08-18 14:23:06
+ * @LastEditTime: 2022-10-30 18:16:04
  */
 export const contentTableConfig = {
   title: '故事列表',

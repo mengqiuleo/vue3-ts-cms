@@ -2,7 +2,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-14 11:52:25
- * @LastEditTime: 2022-09-30 20:25:18
+ * @LastEditTime: 2022-10-30 14:50:06
 -->
 <template>
   <div class="my-form">
@@ -35,7 +35,7 @@
                 />
               </template>
               <template v-else-if="item.type === 'select'">
-                <!-- 如果是下拉选择框 -->
+                <!-- 如果是下拉选择框  这里的:model-value只涉及到值的绑定，和v-model没有任何联系 -->
                 <el-select
                   :placeholder="item.placeholder"
                   style="width: 100%"

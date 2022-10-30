@@ -1,11 +1,11 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-17 19:10:03
- * @LastEditTime: 2022-08-18 02:28:44
+ * @LastEditTime: 2022-10-30 18:41:41
 -->
 <template>
   <div class="page-modal">
-    <el-dialog title="新建用户" width="30%" v-model="dialogVisible" center>
+    <el-dialog title="新建" width="30%" v-model="dialogVisible" center>
       <my-form v-bind="modalConfig" v-model="formData"></my-form>
       <slot></slot>
       <template #footer>

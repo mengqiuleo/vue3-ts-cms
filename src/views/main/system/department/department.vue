@@ -1,24 +1,28 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 21:11:55
- * @LastEditTime: 2022-08-18 13:24:55
+ * @LastEditTime: 2022-10-30 17:46:38
 -->
 <template>
   <div class="department">
-    <pageSearch :searchFormConfig="searchFormConfig" />
-    <pageContent
+    <PageSearch
+      :searchFormConfig="searchFormConfig"
+      @resetBtnClick="handleResetClick"
+      @queryBtnClick="handleQueryClick"
+    />
+    <PageContent
       pageName="department"
       ref="pageContentRef"
       :contentTableConfig="contentTableConfig"
       @newBtnClick="handleNewData"
       @editBtnClick="handleEditData"
-    ></pageContent>
-    <page-modal
+    ></PageContent>
+    <PageModal
       ref="pageModalRef"
       :defaultInfo="defaultInfo"
       :modalConfig="modalConfigRef"
       pageName="department"
-    ></page-modal>
+    ></PageModal>
   </div>
 </template>
 
@@ -45,7 +49,7 @@ export default defineComponent({
     PageModal
   },
   setup() {
-    const [pageContentRef, handleQueryClick, handleResetClick] = usePageSearch()
+    const [pageContentRef, handleResetClick, handleQueryClick] = usePageSearch()
 
     // modal配置信息
     const store = useStore()

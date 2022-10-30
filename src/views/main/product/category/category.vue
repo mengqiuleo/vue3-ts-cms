@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 21:13:31
- * @LastEditTime: 2022-08-18 14:32:57
+ * @LastEditTime: 2022-10-30 18:39:38
 -->
 <template>
   <div class="category">
@@ -10,7 +10,11 @@
       ref="pageContentRef"
       pageName="category"
       :contentTableConfig="contentTableConfig"
-    ></pageContent>
+    >
+      <template #headerHandler>
+        <el-button>编辑</el-button>
+      </template>
+    </pageContent>
   </div>
 </template>
 

@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-16 14:36:27
- * @LastEditTime: 2022-10-01 09:19:25
+ * @LastEditTime: 2022-10-30 18:41:18
 -->
 <template>
   <div class="content">
@@ -12,7 +12,7 @@
       v-model:page="pageInfo"
     >
       <template #headerHandler>
-        <el-button v-if="isCreate" @click="handleNewClick">新建用户</el-button>
+        <el-button v-if="isCreate" @click="handleNewClick">新建</el-button>
       </template>
       <!-- 显示按钮插槽 -->
       <template #status="scope">
@@ -51,6 +51,7 @@
           >
         </div>
       </template>
+      <!-- 其他插槽：比如放图片 -->
       <template
         v-for="item in otherPropSlots"
         :key="item.prop"
@@ -88,16 +89,21 @@ export default defineComponent({
   setup(props, { emit }) {
     const store = useStore()
 
+    // 操作权限，比如删除或编辑
     const isCreate = usePermission(props.pageName, 'create')
     const isUpdate = usePermission(props.pageName, 'update')
     const isDelete = usePermission(props.pageName, 'delete')
-    const isQuery = usePermission(props.pageName, 'query')
+    // const isQuery = usePermission(props.pageName, 'query')
 
     const pageInfo = ref({ currentPage: 1, pageSize: 10 })
     watch(pageInfo, () => getPageData())
 
     const getPageData = (queryInfo: any = {}) => {
-      if (!isQuery) return
+      // if (!isQuery) {
+      //   console.log('无权限')
+      //   return
+      // }
+      console.log('请求数据')
       store.dispatch('system/getPageListAction', {
         pageUrl: props.pageName,
         queryInfo: {
