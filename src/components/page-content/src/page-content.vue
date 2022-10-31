@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-16 14:36:27
- * @LastEditTime: 2022-10-30 18:41:18
+ * @LastEditTime: 2022-10-31 20:55:01
 -->
 <template>
   <div class="content">
@@ -103,7 +103,7 @@ export default defineComponent({
       //   console.log('无权限')
       //   return
       // }
-      console.log('请求数据')
+      // console.log('请求数据')
       store.dispatch('system/getPageListAction', {
         pageUrl: props.pageName,
         queryInfo: {
@@ -136,7 +136,7 @@ export default defineComponent({
 
     // 5.删除操作
     const handleDeleteClick = (item: any) => {
-      console.log('删除')
+      // console.log('删除')
       store.dispatch('system/deletePageDataAction', {
         pageName: props.pageName,
         id: item.id

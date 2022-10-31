@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-10-30 18:47:16
- * @LastEditTime: 2022-10-31 18:50:26
+ * @LastEditTime: 2022-10-31 19:57:39
 -->
 <!-- <template>
   <div class="my-editor">
@@ -118,10 +118,11 @@ export default defineComponent({
 
 <script lang="ts">
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
-import { onBeforeUnmount, ref, shallowRef } from 'vue'
+import { defineComponent, onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 
-export default {
+export default defineComponent({
+  name: 'MyEditor',
   components: { Editor, Toolbar },
   setup() {
     // 编辑器实例，必须用 shallowRef
@@ -168,6 +169,10 @@ export default {
       handleCreated
     }
   }
+})
+
+export interface IClearExposed {
+  clearAllErrors: () => void
 }
 </script>
 

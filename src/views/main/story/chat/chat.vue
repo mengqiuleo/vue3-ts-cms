@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 21:15:16
- * @LastEditTime: 2022-10-31 18:35:28
+ * @LastEditTime: 2022-10-31 19:56:09
 -->
 <template>
   <div class="chat">
@@ -22,7 +22,7 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 
-import MyEditor from '@/base-ui/editor/src/index.vue'
+import MyEditor, { IClearExposed } from '@/base-ui/editor/src/index.vue'
 import { ElMessage } from 'element-plus'
 
 import { publishArticlesData } from '@/service/main/story'
@@ -30,7 +30,9 @@ export default defineComponent({
   name: 'chat',
   components: { MyEditor },
   setup() {
-    const editRef = ref<InstanceType<typeof MyEditor>>()
+    const editRef = ref<
+      null | (InstanceType<typeof MyEditor> & IClearExposed)
+    >()
     const title = ref<string>()
     const publishArticlesClic = () => {
       publishArticlesData({

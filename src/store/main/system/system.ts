@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-10-30 18:18:24
+ * @LastEditTime: 2022-10-31 20:52:38
  */
 import { IRootState } from '@/store/type'
 import { Module } from 'vuex'
@@ -102,15 +102,15 @@ const systemModule: Module<ISystemState, IRootState> = {
       }
       const pageUrl = `/${pageName}/list`
       // 2.对页面发送请求
-      console.log('发送请求url: ', pageUrl)
+      // console.log('发送请求url: ', pageUrl)
       const pageResult = await getPageListData(pageUrl, payload.queryInfo)
 
-      console.log('请求结果：', pageResult)
+      // console.log('请求结果：', pageResult)
       // 3.将数据存放到 state 中
       const { list, totalCount } = pageResult.data
       const changePageName =
         pageName.slice(0, 1).toUpperCase() + pageName.slice(1)
-      console.log('changePageName: ', changePageName)
+      // console.log('changePageName: ', changePageName)
       commit(`change${changePageName}List`, list)
       commit(`change${changePageName}Count`, totalCount)
     },
@@ -133,7 +133,7 @@ const systemModule: Module<ISystemState, IRootState> = {
     async createPageDataAction({ dispatch }, payload: any) {
       const { pageName, newData } = payload
       const pageUrl = `/${pageName}`
-      console.log('创建url: ', pageUrl)
+      // console.log('创建url: ', pageUrl)
       await createPageData(pageUrl, newData)
 
       dispatch('getPageListAction', {
@@ -149,7 +149,7 @@ const systemModule: Module<ISystemState, IRootState> = {
     async editPageDataAction({ dispatch }, payload: any) {
       const { pageName, editData, id } = payload
       const pageUrl = `/${pageName}/${id}`
-      console.log('编辑url: ', pageUrl)
+      // console.log('编辑url: ', pageUrl)
       await editPageData(pageUrl, editData)
 
       dispatch('getPageListAction', {

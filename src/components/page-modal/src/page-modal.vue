@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-17 19:10:03
- * @LastEditTime: 2022-10-30 18:41:41
+ * @LastEditTime: 2022-10-31 20:55:02
 -->
 <template>
   <div class="page-modal">
@@ -61,14 +61,14 @@ export default defineComponent({
     const handleConfirmClick = () => {
       dialogVisible.value = false
       if (Object.keys(props.defaultInfo).length) {
-        console.log('编辑用户')
+        // console.log('编辑用户')
         store.dispatch('system/editPageDataAction', {
           pageName: props.pageName,
           editData: { ...formData.value, ...props.otherInfo },
           id: props.defaultInfo.id
         })
       } else {
-        console.log('新建用户')
+        // console.log('新建用户')
         store.dispatch('system/createPageDataAction', {
           pageName: props.pageName,
           newData: { ...formData.value, ...props.otherInfo }

@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-26 10:07:29
- * @LastEditTime: 2022-09-30 08:59:49
+ * @LastEditTime: 2022-10-31 20:53:07
  */
 import { Module } from 'vuex'
 
@@ -49,7 +49,7 @@ const loginModule: Module<ILoginState, IRootState> = {
       // 下面就是将userMenus菜单添加到路由中
       //# userMenu => routes
       const routes = handleUserMenu(userMenus)
-      console.log('routes: ', routes)
+      // console.log('routes: ', routes)
 
       // 将routes => router.main.children
       // 前面还在疑惑，注册的所有页面的路由放在哪里注册？ 就是在这里用：并且要注意我们的所有页面的路由应该是main组件的子路由
@@ -67,9 +67,9 @@ const loginModule: Module<ILoginState, IRootState> = {
       //console.log('执行store的异步action去登录', payload)
       // 1.实现登录逻辑
       const loginResult = await accountLoginRequest(payload) //这里的await的函数都会包含着对应的后端请求路径
-      console.log(loginResult)
+      // console.log(loginResult)
       // 登录：向后端发送请求，返回的是用户id和token
-      console.log(loginResult.data.id, loginResult.data.token)
+      // console.log(loginResult.data.id, loginResult.data.token)
       const { token, id } = loginResult.data
       commit('changeToken', token) //token保存到vuex中
       localCache.setCache('token', token) //token保存到localStorage中

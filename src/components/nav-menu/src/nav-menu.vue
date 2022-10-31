@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 17:35:38
- * @LastEditTime: 2022-09-30 19:11:09
+ * @LastEditTime: 2022-10-31 20:54:59
 -->
 <template>
   <div class="nav-menu">
@@ -84,12 +84,12 @@ export default defineComponent({
 
     // 这里是实现：选中我们点击的菜单
     const currentPath = route.path
-    console.log('currentPath: ', currentPath)
-    console.log('userMenus.value: ', userMenus.value)
+    // console.log('currentPath: ', currentPath)
+    // console.log('userMenus.value: ', userMenus.value)
     const menu = pathMapToMenu(userMenus.value, currentPath)
     const defaultValue = ref(menu.id + '') //我们点击选中的菜单id
-    console.log('menu: ', menu)
-    console.log('menu.id: ', menu.id)
+    // console.log('menu: ', menu)
+    // console.log('menu.id: ', menu.id)
     // 上面具体的例子(打印结果)
     /**
      * currentPath:  /main/story/chat
@@ -104,7 +104,7 @@ export default defineComponent({
       }
     }
     const handleMenuItemClick = (item: any) => {
-      console.log('点击那个路由：', item)
+      // console.log('点击那个路由：', item)
       // 点击对应的路由，跳转到指定页面
       router.push({
         path: item.url ?? '/not-found'

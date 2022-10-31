@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 21:10:13
- * @LastEditTime: 2022-08-17 23:06:55
+ * @LastEditTime: 2022-10-31 20:51:23
 -->
 <template>
   <div class="user">
@@ -53,14 +53,14 @@ export default defineComponent({
         (item) => item.field === 'password'
       )
       passwordItem!.isHidden = false
-      console.log('新建：', passwordItem.isHidden)
+      // console.log('新建：', passwordItem.isHidden)
     }
     const editCallback = () => {
       const passwordItem = modalConfig.formItems.find(
         (item) => item.field === 'password'
       )
       passwordItem!.isHidden = true
-      console.log('编辑：', passwordItem.isHidden)
+      // console.log('编辑：', passwordItem.isHidden)
     }
 
     // 2.动态添加部门和角色列表

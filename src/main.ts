@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 03:51:07
- * @LastEditTime: 2022-10-29 12:59:08
+ * @LastEditTime: 2022-10-31 20:55:06
  */
 import { createApp } from 'vue'
 import { registerApp } from './global'
@@ -23,4 +23,4 @@ app.use(router)
 app.use(store)
 app.mount('#app')
 
-console.log(process.env)
+// console.log(process.env)

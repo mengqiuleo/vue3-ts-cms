@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:12:14
- * @LastEditTime: 2022-08-14 01:23:21
+ * @LastEditTime: 2022-10-31 20:51:32
 -->
 <template>
   <div class="main">
@@ -36,7 +36,7 @@ export default defineComponent({
 
     const handleFoldChange = (isFold: boolean) => {
       isCollapse.value = isFold
-      console.log(isFold)
+      // console.log(isFold)
     }
     return {
       isCollapse,

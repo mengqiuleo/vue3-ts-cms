@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 23:13:32
- * @LastEditTime: 2022-10-28 13:35:35
+ * @LastEditTime: 2022-10-31 20:51:58
  */
 import { IBreadcrumb } from '@/base-ui/breadcrumb'
 import { RouteRecordRaw } from 'vue-router'
@@ -26,7 +26,7 @@ export function handleUserMenu(userMenus: any): RouteRecordRaw[] {
     const routePath = require('../router/main' + element.split('.')[1])
     allRoutes.push(routePath.default)
   })
-  console.log('allRoutes: ', allRoutes)
+  // console.log('allRoutes: ', allRoutes)
 
   // 3.定义返回的路由数组
   const routes: RouteRecordRaw[] = []
@@ -122,7 +122,7 @@ export function mapMenuToPermission(userMenus: any[]) {
 
 export function menuMapLeafKeys(userMenus: any): any {
   const leftKeys: number[] = []
-  console.log(userMenus)
+  // console.log(userMenus)
   const _recurseGetMenu = (menus: any): any => {
     for (const item of menus) {
       if (item.type === 1) {

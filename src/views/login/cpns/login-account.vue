@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-06-24 22:36:11
- * @LastEditTime: 2022-10-30 12:25:54
+ * @LastEditTime: 2022-10-31 20:51:43
 -->
 <template>
   <div class="login-account">
@@ -48,11 +48,11 @@ export default defineComponent({
 
     // 这个登录的函数会导出，在 login-panel组件中调用(通过ref来绑定当前组件使用)
     const loginAction = (isKeepPassword: boolean) => {
-      console.log('里面小组件收到消息，开始登录')
+      // console.log('里面小组件收到消息，开始登录')
       // validate属性是组件自带的，判断账号密码通过后，会返回true(否则为false)
       formRef.value?.validate((valid) => {
         if (valid) {
-          console.log('表单验证通过，真正执行登录逻辑')
+          // console.log('表单验证通过，真正执行登录逻辑')
           // 1.判断是否需要记住密码
           if (isKeepPassword) {
             //本地缓存
