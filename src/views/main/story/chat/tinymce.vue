@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 21:15:16
- * @LastEditTime: 2022-10-31 21:59:52
+ * @LastEditTime: 2022-10-31 21:27:10
 -->
 <template>
   <div class="chat">
@@ -20,13 +20,13 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 
 import MyEditor from '@/base-ui/editor/src/index.vue'
 import { ElMessage } from 'element-plus'
 
 import { publishArticlesData } from '@/service/main/story'
-export default {
+export default defineComponent({
   name: 'chat',
   components: { MyEditor },
   setup() {
@@ -49,7 +49,7 @@ export default {
     }
     return { editRef, publishArticlesClic, title }
   }
-}
+})
 </script>
 
 <style lang="less" scoped>
