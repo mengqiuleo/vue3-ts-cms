@@ -1,3 +1,8 @@
+<!--
+ * @Author: Pan Jingyi
+ * @Date: 2022-08-13 21:15:16
+ * @LastEditTime: 2022-10-31 18:35:28
+-->
 <template>
   <div class="chat">
     <div class="header">
@@ -30,7 +35,7 @@ export default defineComponent({
     const publishArticlesClic = () => {
       publishArticlesData({
         title: title.value!,
-        cotent: editRef.value!.content.html
+        content: editRef.value!.valueHtml
       })
         .then(() => {
           ElMessage.success({

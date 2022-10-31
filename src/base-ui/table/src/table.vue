@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 23:16:44
- * @LastEditTime: 2022-10-30 15:08:57
+ * @LastEditTime: 2022-10-31 18:49:54
 -->
 <template>
   <div class="my-table">
@@ -40,7 +40,11 @@
         align="center"
       />
       <template v-for="propItem in propList" :key="propItem.prop">
-        <el-table-column v-bind="propItem" align="center" show-overflow-tooltip>
+        <el-table-column
+          v-bind="propItem"
+          align="center"
+          :show-overflow-tooltip="true"
+        >
           <template #default="scope">
             <!-- scope.row 代表这一行的数据，这个数据原本就有，没必要纠结是从哪来的 -->
             <!-- 这里放一个插槽，默认值就是你原来写的prop属性，但是也可以填自己的，比如时间格式进行转换后再显示 -->
@@ -129,6 +133,7 @@ export default defineComponent({
     const handleSizeChange = (pageSize: number) => {
       emit('update:page', { ...props.page, pageSize })
     }
+
     return {
       handleSelectChange,
       handleSizeChange,

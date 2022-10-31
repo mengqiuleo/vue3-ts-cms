@@ -1,3 +1,8 @@
+/*
+ * @Author: Pan Jingyi
+ * @Date: 2022-08-18 04:45:42
+ * @LastEditTime: 2022-10-31 18:58:17
+ */
 export const technologyStacks = [
   {
     title: '开发工具',
@@ -6,12 +11,12 @@ export const technologyStacks = [
 
   {
     title: '编程语言',
-    desp: 'TypeScript 4.x + JavaScript'
+    desp: 'TypeScript 5.x + JavaScript'
   },
 
   {
     title: '构建工具',
-    desp: 'Vite 2.x / Webpack5.x'
+    desp: 'Webpack5.x'
   },
 
   {
@@ -51,7 +56,7 @@ export const technologyStacks = [
 
   {
     title: 'CSS 预编译',
-    desp: 'Sass / Less'
+    desp: 'Less'
   },
 
   {
@@ -76,6 +81,6 @@ export const technologyStacks = [
 
   {
     title: '自动部署',
-    desp: 'Centos + Jenkins + Nginx'
+    desp: 'Centos + Docker + Nginx + Github Actions'
   }
 ]

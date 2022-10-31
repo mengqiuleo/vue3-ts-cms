@@ -1,81 +1,55 @@
+/*
+ * @Author: Pan Jingyi
+ * @Date: 2022-08-18 04:45:42
+ * @LastEditTime: 2022-10-31 18:56:43
+ */
 import type { DescriptionProp } from '@/base-ui/descriptions'
 export const devDependencies: DescriptionProp[] = [
   {
     name: 'typescript',
-    description: '^4.1.3'
+    description: '^4.5.5'
   },
   {
     name: 'webpack',
     description: '5'
   },
-  {
-    name: 'vite',
-    description: '^2.2.3'
-  },
 
   {
     name: 'eslint',
-    description: '^7.25.0'
+    description: '^7.32.0'
   },
   {
     name: 'prettier',
-    description: '^2.2.1'
-  },
-  {
-    name: 'stylelint',
-    description: '^13.13.0'
+    description: '^2.4.1'
   },
   {
     name: 'husky',
-    description: '^6.0.0'
-  },
-  {
-    name: 'lint-staged',
-    description: '^10.5.4'
-  },
-  {
-    name: 'rimraf',
-    description: '^3.0.2'
+    description: '^7.0.0'
   },
   {
     name: '@commitlint/cli',
-    description: '^12.1.1'
+    description: '^16.2.3'
   },
   {
     name: '@commitlint/config-conventional',
-    description: '^12.1.1'
+    description: '^16.2.1'
   },
-  {
-    name: '@types/node',
-    description: '^14.14.41'
-  },
+
   {
     name: '@typescript-eslint/eslint-plugin',
-    description: '^4.22.0'
+    description: '^5.18.0'
   },
   {
     name: '@typescript-eslint/parser',
-    description: '^4.22.0'
-  },
-  {
-    name: '@vitejs/plugin-vue',
-    description: '^1.2.2'
-  },
-  {
-    name: '@vue/compiler-sfc',
-    description: '^3.0.5'
+    description: '^5.18.0'
   },
   {
     name: 'commitizen',
-    description: '^4.2.3'
+    description: '^4.2.4'
   },
   {
     name: 'cz-conventional-changelog',
     description: '3.3.0'
-  },
-  {
-    name: 'eslint-config-airbnb-base',
-    description: '^14.2.1'
   },
   {
     name: 'eslint-config-prettier',
@@ -92,26 +66,6 @@ export const devDependencies: DescriptionProp[] = [
   {
     name: 'eslint-plugin-vue',
     description: '^7.9.0'
-  },
-  {
-    name: 'stylelint-config-prettier',
-    description: '^8.0.2'
-  },
-  {
-    name: 'stylelint-config-standard',
-    description: '^22.0.0'
-  },
-  {
-    name: 'stylelint-order',
-    description: '^4.1.0'
-  },
-  {
-    name: 'vite-plugin-mock',
-    description: '^2.5.0'
-  },
-  {
-    name: 'vue-tsc',
-    description: '^0.0.8'
   }
   // {
   //   name: 'xxxx',

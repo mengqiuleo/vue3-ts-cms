@@ -1,10 +1,10 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-10-30 18:47:16
- * @LastEditTime: 2022-10-30 19:18:17
+ * @LastEditTime: 2022-10-31 18:50:26
 -->
-<template>
-  <div class="msi-editor">
+<!-- <template>
+  <div class="my-editor">
     <div ref="editorRef" class="editor"></div>
     <div :innerHTML="content.html" class="content" ref="contentRef"></div>
   </div>
@@ -22,7 +22,7 @@ import {
 import WangEditor from 'wangeditor'
 
 export default defineComponent({
-  name: 'MsiEditor',
+  name: 'MyEditor',
   setup() {
     const editorRef = ref<HTMLDivElement>()
     const content = reactive({
@@ -76,7 +76,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-.msi-editor {
+.my-editor {
   display: flex;
   width: 100%;
   height: 100%;
@@ -93,5 +93,87 @@ export default defineComponent({
     background-color: #fff;
     border: 1px solid #c9d8db;
   }
+}
+</style> -->
+
+<template>
+  <div style="border: 1px solid #ccc">
+    <!-- 工具栏 -->
+    <Toolbar
+      class="toolBar"
+      :editor="editorRef"
+      :defaultConfig="toolbarConfig"
+      :mode="mode"
+    />
+    <!-- 编辑器 -->
+    <Editor
+      style="height: 440px"
+      v-model="valueHtml"
+      :defaultConfig="editorConfig"
+      :mode="mode"
+      @onCreated="handleCreated"
+    />
+  </div>
+</template>
+
+<script lang="ts">
+import '@wangeditor/editor/dist/css/style.css' // 引入 css
+import { onBeforeUnmount, ref, shallowRef } from 'vue'
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
+
+export default {
+  components: { Editor, Toolbar },
+  setup() {
+    // 编辑器实例，必须用 shallowRef
+    const editorRef = shallowRef()
+
+    // 内容 HTML
+    const valueHtml = ref('')
+
+    // 模拟 ajax 异步获取内容
+    // onMounted(() => {
+    //   setTimeout(() => {
+    //     valueHtml.value = '<p>模拟 Ajax 异步设置内容</p>'
+    //   }, 1500)
+    // })
+
+    const toolbarConfig = {
+      excludeKeys: [
+        /* 隐藏哪些菜单 */
+        'group-image',
+        'group-video'
+      ]
+    }
+
+    // 编辑器配置
+    const editorConfig = { placeholder: '请输入内容...' }
+
+    // 组件销毁时，也及时销毁编辑器
+    onBeforeUnmount(() => {
+      const editor = editorRef.value
+      if (editor == null) return
+      editor.destroy()
+    })
+
+    const handleCreated = (editor) => {
+      editorRef.value = editor // 记录 editor 实例，重要！
+    }
+
+    return {
+      editorRef,
+      valueHtml,
+      mode: 'default', // 或 'simple'
+      toolbarConfig,
+      editorConfig,
+      handleCreated
+    }
+  }
+}
+</script>
+
+<style scoped>
+.toolBar {
+  border-bottom: 1px solid #ccc;
+  /* font-size: 15px; */
 }
 </style>

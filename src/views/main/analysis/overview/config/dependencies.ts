@@ -1,3 +1,8 @@
+/*
+ * @Author: Pan Jingyi
+ * @Date: 2022-08-18 04:45:42
+ * @LastEditTime: 2022-10-31 18:53:56
+ */
 import type { DescriptionProp } from '@/base-ui/descriptions'
 export const dependencies: DescriptionProp[] = [
   {
@@ -14,29 +19,21 @@ export const dependencies: DescriptionProp[] = [
   },
   {
     name: 'axios',
-    description: '^0.21.1'
+    description: '^0.26.1'
   },
   {
     name: 'element-plus',
-    description: '^1.0.2-beta.41'
-  },
-
-  {
-    name: 'mockjs',
-    description: '^1.1.0'
+    description: '^2.1.9'
   },
 
   {
     name: 'less',
     description: '^4.1.1'
   },
-  {
-    name: 'scss',
-    description: '^0.2.4'
-  },
+
   {
     name: 'EChart',
-    description: '^5.1.1'
+    description: '^5.4.0'
   },
 
   {
@@ -51,12 +48,9 @@ export const dependencies: DescriptionProp[] = [
     name: 'dayjs',
     description: '^1.10.4'
   },
-  {
-    name: 'pinia',
-    description: '^2.0.0-alpha.13'
-  },
+
   {
     name: 'wangeditor',
-    description: '^4.6.17'
+    description: '^4.7.7'
   }
 ]
