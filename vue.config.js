@@ -1,11 +1,11 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-11-01 19:09:47
+ * @LastEditTime: 2022-11-01 19:11:07
  */
 const path = require('path')
-const BundleAnalyzerPlugin =
-  require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+// const BundleAnalyzerPlugin =
+//   require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
