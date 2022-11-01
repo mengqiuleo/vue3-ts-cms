@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-11-01 19:21:12
+ * @LastEditTime: 2022-11-01 20:49:36
  */
 const path = require('path')
 // const BundleAnalyzerPlugin =
@@ -15,15 +15,6 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 //* "build": "vue-cli-service build"
 const IS_PRODUCTION = ['production', 'prod'].includes(process.env.NODE_ENV) //判断是否是生产环境
-
-// let externals = {}
-// if (process.env.NODE_ENV === 'production') {
-//   externals = {
-//     vue: 'Vue',
-//     'element-ui': 'ELEMENT',
-//     xlsx: 'XLSX'
-//   }
-// }
 
 module.exports = {
   outputDir: './dist',
@@ -143,6 +134,42 @@ module.exports = {
         }
       : {}
     // externals: IS_PRODUCTION ? externals : {}
+  },
+  chainWebpack: (config) => {
+    if (process.env.NODE_ENV === 'production') {
+      var externals = {
+        vue: 'Vue',
+        axios: 'axios',
+        'element-ui': 'ELEMENT',
+        'vue-router': 'VueRouter',
+        vuex: 'Vuex'
+      }
+      config.externals(externals)
+      const cdn = {
+        css: [
+          // element-ui css
+          'https://cdn.bootcdn.net/ajax/libs/element-plus/1.1.4/dist/index.css'
+        ],
+        js: [
+          // vue
+          'https://cdn.bootcdn.net/ajax/libs/vue/3.2.13/vue.min.js',
+          // vue-router
+          'https://cdn.bootcdn.net/ajax/libs/vue-router/4.0.3/vue-router.min.js',
+          // vuex
+          'https://cdn.bootcdn.net/ajax/libs/vuex/4.0.0/vuex.min.js',
+          // axios
+          'https://cdn.bootcdn.net/ajax/libs/axios/0.26.1/axios.min.js',
+          // element-ui js
+          'https://cdn.bootcdn.net/ajax/libs/element-plus/1.1.4/index.js',
+          'https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/1.1.4/index.min.js'
+        ]
+      }
+      // 通过 html-webpack-plugin 将 cdn 注入到 index.html 之中
+      config.plugin('html').tap((args) => {
+        args[0].cdn = cdn
+        return args
+      })
+    }
   },
   publicPath: './' // 注意 这里使用 /  如果不行的话  就 ./
 }
