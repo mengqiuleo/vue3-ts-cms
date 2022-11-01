@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-11-01 21:05:50
+ * @LastEditTime: 2022-11-01 22:00:00
  */
 const path = require('path')
 // const BundleAnalyzerPlugin =
@@ -94,7 +94,7 @@ module.exports = {
             chunks: 'all', // 表示哪些代码需要优化，有三个可选值：initial(初始块)、async(按需加载块)、all(全部块)，默认为async
             maxInitialRequests: Infinity, // 按需加载时候最大的并行请求数，默认为5
             minSize: 20000, // 依赖包超过300000bit将被单独打包
-            maxSize: 60000, // 若引入的模块大于60kb，则告诉webpack尝试再进行拆分
+            maxSize: 100000, // 若引入的模块大于60kb，则告诉webpack尝试再进行拆分
             // 缓存组
             // priority: 缓存组打包的先后优先级
             // minChunks: 表示被引用次数，默认为1
