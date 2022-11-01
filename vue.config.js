@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-11-01 19:01:26
+ * @LastEditTime: 2022-11-01 19:09:47
  */
 const path = require('path')
 const BundleAnalyzerPlugin =
@@ -158,7 +158,7 @@ module.exports = {
     },
     plugins: IS_PRODUCTION
       ? [
-          new BundleAnalyzerPlugin({}),
+          // new BundleAnalyzerPlugin({}), //在浏览器打开包大小
           new CleanWebpackPlugin(), //删除打包文件插件
           // 使用 ParallelUglifyPlugin 并行压缩输出的 JS 代码
           new ParallelUglifyPlugin({
