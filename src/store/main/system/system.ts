@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 21:58:38
- * @LastEditTime: 2022-10-31 20:52:38
+ * @LastEditTime: 2022-11-01 09:55:22
  */
 import { IRootState } from '@/store/type'
 import { Module } from 'vuex'
@@ -149,7 +149,7 @@ const systemModule: Module<ISystemState, IRootState> = {
     async editPageDataAction({ dispatch }, payload: any) {
       const { pageName, editData, id } = payload
       const pageUrl = `/${pageName}/${id}`
-      // console.log('编辑url: ', pageUrl)
+      console.log('编辑url: ', pageUrl)
       await editPageData(pageUrl, editData)
 
       dispatch('getPageListAction', {

@@ -63,7 +63,7 @@ import 'tinymce/plugins/visualblocks' //显示元素范围
 import 'tinymce/plugins/visualchars' //显示不可见字符
 import 'tinymce/plugins/wordcount' //字数统计
 import { onMounted } from '@vue/runtime-core'
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 export default defineComponent({
   name: 'TEditor',
   components: {
@@ -143,7 +143,7 @@ export default defineComponent({
       // images_upload_base_path: '/demo',  //相对基本路径--关于图片上传建议查看--http://tinymce.ax-z.cn/general/upload-images.php
       // 此处为图片上传处理函数，这个直接用了base64的图片形式上传图片，
       // 如需ajax上传可参考https://www.tiny.cloud/docs/configure/file-image-upload/#images_upload_handler
-      images_upload_handler: (blobInfo, success, failure) => {
+      images_upload_handler: (blobInfo, success) => {
         const img = 'data:image/jpeg;base64,' + blobInfo.base64()
         success(img)
       }
@@ -166,18 +166,18 @@ export default defineComponent({
       tinymce.Editor['myedit'].setMode(type) //开启只读模式
     }
     const content = ref()
-    watch(
-      () => props.modelValue,
-      (initInfo, prevInitInfo) => {
-        content.value = props.modelValue
-      }
-    )
-    watch(
-      () => content.value,
-      (initInfo, prevInitInfo) => {
-        revert_data(content)
-      }
-    )
+    // watch(
+    //   () => props.modelValue,
+    //   (initInfo, prevInitInfo) => {
+    //     content.value = props.modelValue
+    //   }
+    // )
+    // watch(
+    //   () => content.value,
+    //   (initInfo, prevInitInfo) => {
+    //     revert_data(content)
+    //   }
+    // )
     onMounted(() => {
       // readonly();
     })

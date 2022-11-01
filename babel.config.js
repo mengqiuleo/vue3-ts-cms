@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 03:51:07
- * @LastEditTime: 2022-10-31 20:18:43
+ * @LastEditTime: 2022-11-01 13:14:52
  */
 // 存储项目发布阶段需要用到的插件
 const productPlugins = []
@@ -14,5 +14,5 @@ if (process.env.NODE_ENV === 'production') {
 
 module.exports = {
   presets: ['@vue/cli-plugin-babel/preset'],
-  plugins: [...productPlugins]
+  plugins: ['lodash', ...productPlugins]
 }

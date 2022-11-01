@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-13 17:35:38
- * @LastEditTime: 2022-10-31 20:54:59
+ * @LastEditTime: 2022-11-01 09:53:32
 -->
 <template>
   <div class="nav-menu">
@@ -104,7 +104,7 @@ export default defineComponent({
       }
     }
     const handleMenuItemClick = (item: any) => {
-      // console.log('点击那个路由：', item)
+      console.log('点击那个路由：', item)
       // 点击对应的路由，跳转到指定页面
       router.push({
         path: item.url ?? '/not-found'

@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 06:16:16
- * @LastEditTime: 2022-10-28 10:53:00
+ * @LastEditTime: 2022-11-01 09:52:04
  */
 import { createRouter, createWebHashHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
@@ -43,8 +43,8 @@ router.beforeEach((to) => {
     }
   }
 
-  // console.log('刷新丢失问题：', router.getRoutes())
-  // console.log('刷新丢失问题：', to)
+  console.log('刷新丢失问题：', router.getRoutes())
+  console.log('刷新丢失问题：', to)
 
   // 解决直接访问 localhost:8080 为空白的情况
   if (to.path === '/main') {

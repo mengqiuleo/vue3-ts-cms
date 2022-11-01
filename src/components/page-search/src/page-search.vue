@@ -1,7 +1,7 @@
 <!--
  * @Author: Pan Jingyi
  * @Date: 2022-08-15 20:28:01
- * @LastEditTime: 2022-10-31 20:55:04
+ * @LastEditTime: 2022-11-01 09:52:53
 -->
 <template>
   <!-- 通过v-model实现组件之间的数据双向绑定：并且传给子组件的值叫：modelValue，并不叫formData -->
@@ -51,7 +51,7 @@ export default defineComponent({
 
     // 2.重置按钮
     const handleResetClick = () => {
-      // console.log('重置')
+      console.log('重置')
       // for (const key in formOriginData) {
       //   formData.value[`${key}`] = formOriginData[key]
       // }
