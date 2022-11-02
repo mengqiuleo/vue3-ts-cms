@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-11-02 11:06:52
+ * @LastEditTime: 2022-11-02 11:43:40
  */
 const path = require('path')
 // const BundleAnalyzerPlugin =
@@ -189,7 +189,7 @@ module.exports = {
       const cdn = {
         css: [
           // element-ui css
-          'https://cdn.bootcdn.net/ajax/libs/element-plus/1.1.4/dist/index.css'
+          'https://cdn.bootcdn.net/ajax/libs/element-plus/2.1.9/index.css'
         ],
         js: [
           // vue
@@ -201,8 +201,9 @@ module.exports = {
           // axios
           // 'https://cdn.bootcdn.net/ajax/libs/axios/0.26.1/axios.min.js',
           // element-ui js
-          'https://cdn.bootcdn.net/ajax/libs/element-plus/1.1.4/index.js',
-          'https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/1.1.4/index.min.js',
+          'https://cdn.bootcdn.net/ajax/libs/element-plus/2.1.9/index.full.min.js',
+          'https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/2.0.5/index.js',
+          'https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/1.1.4/index.js',
           // echarts
           'https://cdn.bootcdn.net/ajax/libs/echarts/5.4.0/echarts.min.js'
         ]
