@@ -2,7 +2,7 @@
 node_modules
 /dist
 /build
-
+/cert
 
 # local env files
 .env.local
