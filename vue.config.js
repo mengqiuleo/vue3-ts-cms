@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-11-01 22:00:00
+ * @LastEditTime: 2022-11-02 11:06:52
  */
 const path = require('path')
 // const BundleAnalyzerPlugin =
@@ -15,6 +15,8 @@ const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 //* "build": "vue-cli-service build"
 const IS_PRODUCTION = ['production', 'prod'].includes(process.env.NODE_ENV) //判断是否是生产环境
+// cdn相关配置
+// const cdnConfig = require('./cdn.config.js')
 
 module.exports = {
   outputDir: './dist',
@@ -94,7 +96,7 @@ module.exports = {
             chunks: 'all', // 表示哪些代码需要优化，有三个可选值：initial(初始块)、async(按需加载块)、all(全部块)，默认为async
             maxInitialRequests: Infinity, // 按需加载时候最大的并行请求数，默认为5
             minSize: 20000, // 依赖包超过300000bit将被单独打包
-            maxSize: 100000, // 若引入的模块大于60kb，则告诉webpack尝试再进行拆分
+            maxSize: 150000, // 若引入的模块大于60kb，则告诉webpack尝试再进行拆分
             // 缓存组
             // priority: 缓存组打包的先后优先级
             // minChunks: 表示被引用次数，默认为1
@@ -172,5 +174,45 @@ module.exports = {
   //     })
   //   }
   // },
+  chainWebpack: (config) => {
+    if (process.env.NODE_ENV === 'production') {
+      var externals = {
+        // vue: 'Vue',
+        // 'vue-router': 'VueRouter',
+        // vuex: 'Vuex',
+        // axios: 'axios',
+        echarts: 'echarts',
+        // 必须是ELEMENT，否则会报‘elementUI is not defined’
+        'element-plus': 'ELEMENT'
+      }
+      config.externals(externals)
+      const cdn = {
+        css: [
+          // element-ui css
+          'https://cdn.bootcdn.net/ajax/libs/element-plus/1.1.4/dist/index.css'
+        ],
+        js: [
+          // vue
+          // 'https://cdn.bootcdn.net/ajax/libs/vue/3.2.13/vue.min.js',
+          // vue-router
+          // 'https://cdn.bootcdn.net/ajax/libs/vue-router/4.0.3/vue-router.min.js',
+          // vuex
+          // 'https://cdn.bootcdn.net/ajax/libs/vuex/4.0.0/vuex.min.js',
+          // axios
+          // 'https://cdn.bootcdn.net/ajax/libs/axios/0.26.1/axios.min.js',
+          // element-ui js
+          'https://cdn.bootcdn.net/ajax/libs/element-plus/1.1.4/index.js',
+          'https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/1.1.4/index.min.js',
+          // echarts
+          'https://cdn.bootcdn.net/ajax/libs/echarts/5.4.0/echarts.min.js'
+        ]
+      }
+      // 通过 html-webpack-plugin 将 cdn 注入到 index.html 之中
+      config.plugin('html').tap((args) => {
+        args[0].cdn = cdn
+        return args
+      })
+    }
+  },
   publicPath: './' // 注意 这里使用 /  如果不行的话  就 ./
 }

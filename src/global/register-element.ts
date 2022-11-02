@@ -1,11 +1,11 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 14:14:25
- * @LastEditTime: 2022-08-18 05:13:13
+ * @LastEditTime: 2022-11-02 11:02:51
  */
 import { App } from 'vue'
 import 'element-plus/dist/index.css'
-// import 'element-plus/lib/theme-chalk/index.css'
+// 错误的： import 'element-plus/lib/theme-chalk/index.css'
 
 import {
   ElAside,
