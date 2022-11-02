@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-11-02 11:55:47
+ * @LastEditTime: 2022-11-02 12:13:33
  */
 const path = require('path')
 // const BundleAnalyzerPlugin =
@@ -106,7 +106,7 @@ module.exports = {
                 name: 'chunk-commons',
                 test: path.resolve('src/components'), // can customize your rules
                 minSize: 100, //大小超过100个字节
-                minChunks: 3, //  最小共用次数
+                minChunks: 2, //  最小共用次数
                 priority: 5,
                 reuseExistingChunk: true
               },
@@ -133,8 +133,8 @@ module.exports = {
                 enforce: true
               },
               editor: {
-                name: 'chunk-echarts',
-                test: /[\\/]node_modules[\\/]echarts[\\/]/,
+                name: 'chunk-editor',
+                test: /[\\/]node_modules[\\/]wangeditor[\\/]/,
                 chunks: 'all',
                 priority: 15, // 切分的优先级，使 element-ui 不会被切分到 chuck-libs 中
                 reuseExistingChunk: true,
@@ -189,9 +189,8 @@ module.exports = {
         // 'vue-router': 'VueRouter',
         // vuex: 'Vuex',
         // axios: 'axios',
-        echarts: 'echarts',
-        // 必须是ELEMENT，否则会报‘elementUI is not defined’
-        'element-plus': 'ElementPlus'
+        echarts: 'echarts'
+        // 'element-plus': 'ElementPlus'
       }
       config.externals(externals)
       const cdn = {
@@ -209,8 +208,8 @@ module.exports = {
           // axios
           // 'https://cdn.bootcdn.net/ajax/libs/axios/0.26.1/axios.min.js',
           // element-ui js
-          'https://cdn.bootcdn.net/ajax/libs/element-plus/2.1.9/index.full.min.js',
-          'https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/2.0.5/index.js',
+          // 'https://cdn.bootcdn.net/ajax/libs/element-plus/2.1.9/index.full.min.js',
+          // 'https://cdn.bootcdn.net/ajax/libs/element-plus-icons-vue/2.0.5/index.js',
           // echarts
           'https://cdn.bootcdn.net/ajax/libs/echarts/5.4.0/echarts.min.js'
         ]
