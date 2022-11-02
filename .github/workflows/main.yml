@@ -31,4 +31,4 @@ jobs:
             docker rm cms
             docker rmi mengqiuleo/cms-image:latest
             docker pull mengqiuleo/cms-image:latest
-            docker run -d -p 5555:80 --name cms mengqiuleo/cms-image:latest
+            docker run -d -p 49003:80 --name cms mengqiuleo/cms-image:latest
