@@ -1,7 +1,7 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-11-02 11:53:37
+ * @LastEditTime: 2022-11-02 11:55:47
  */
 const path = require('path')
 // const BundleAnalyzerPlugin =
@@ -191,7 +191,7 @@ module.exports = {
         // axios: 'axios',
         echarts: 'echarts',
         // 必须是ELEMENT，否则会报‘elementUI is not defined’
-        'element-plus': 'ELEMENT'
+        'element-plus': 'ElementPlus'
       }
       config.externals(externals)
       const cdn = {
