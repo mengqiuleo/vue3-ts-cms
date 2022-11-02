@@ -1,16 +1,16 @@
 /*
  * @Author: Pan Jingyi
  * @Date: 2022-06-23 05:57:16
- * @LastEditTime: 2022-11-02 12:13:33
+ * @LastEditTime: 2022-11-02 12:32:29
  */
 const path = require('path')
 // const BundleAnalyzerPlugin =
 //   require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+// const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const CompressionPlugin = require('compression-webpack-plugin')
+// const TerserPlugin = require('terser-webpack-plugin')
+// const CompressionPlugin = require('compression-webpack-plugin')
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin')
 
 //* "build": "vue-cli-service build"
@@ -33,9 +33,9 @@ module.exports = {
     }
   },
   configureWebpack: {
-    devtool: IS_PRODUCTION
-      ? 'nosources-source-map'
-      : 'eval-cheap-module-source-map',
+    // devtool: IS_PRODUCTION
+    //   ? 'nosources-source-map'
+    //   : 'eval-cheap-module-source-map',
     resolve: {
       alias: {
         '@': path.resolve(__dirname, 'src'),
@@ -50,47 +50,47 @@ module.exports = {
           // new BundleAnalyzerPlugin({}), //在浏览器打开包大小
           new CleanWebpackPlugin(), //删除打包文件插件
           // 使用 ParallelUglifyPlugin 并行压缩输出的 JS 代码
-          new ParallelUglifyPlugin({
-            // 传递给 UglifyJS 的参数
-            uglifyJS: {
-              output: {
-                // 最紧凑的输出
-                beautify: false,
-                // 删除所有的注释
-                comments: false
-              },
-              // 在UglifyJs删除没有用到的代码时不输出警告
-              warnings: false,
-              compress: {
-                // 删除所有的 `console` 语句，可以兼容ie浏览器
-                drop_console: true,
-                // 内嵌定义了但是只用到一次的变量
-                collapse_vars: true,
-                // 提取出出现多次但是没有定义成变量去引用的静态值
-                reduce_vars: true
-              }
-            }
-          }),
-          new LodashModuleReplacementPlugin(),
-          new CompressionPlugin({
-            test: /\.js$|\.html$|\.css/, //匹配文件名
-            threshold: 10240, //对超过10k的数据进行压缩
-            deleteOriginalAssets: false //是否删除原文件
-          })
+          // new ParallelUglifyPlugin({
+          //   // 传递给 UglifyJS 的参数
+          //   uglifyJS: {
+          //     output: {
+          //       // 最紧凑的输出
+          //       beautify: false,
+          //       // 删除所有的注释
+          //       comments: false
+          //     },
+          //     // 在UglifyJs删除没有用到的代码时不输出警告
+          //     warnings: false,
+          //     compress: {
+          //       // 删除所有的 `console` 语句，可以兼容ie浏览器
+          //       drop_console: true,
+          //       // 内嵌定义了但是只用到一次的变量
+          //       collapse_vars: true,
+          //       // 提取出出现多次但是没有定义成变量去引用的静态值
+          //       reduce_vars: true
+          //     }
+          //   }
+          // }),
+          new LodashModuleReplacementPlugin()
+          // new CompressionPlugin({
+          //   test: /\.js$|\.html$|\.css/, //匹配文件名
+          //   threshold: 10240, //对超过10k的数据进行压缩
+          //   deleteOriginalAssets: false //是否删除原文件
+          // })
         ]
       : [],
     optimization: IS_PRODUCTION
       ? {
           minimizer: [
-            new CssMinimizerPlugin(), // 去重压缩css
-            new TerserPlugin({
-              // 压缩JS代码
-              terserOptions: {
-                compress: {
-                  drop_console: true // 去除console
-                }
-              }
-            }) // 压缩JavaScript
+            new CssMinimizerPlugin() // 去重压缩css
+            // new TerserPlugin({
+            //   // 压缩JS代码
+            //   terserOptions: {
+            //     compress: {
+            //       drop_console: true // 去除console
+            //     }
+            //   }
+            // }) // 压缩JavaScript
           ],
           splitChunks: {
             chunks: 'all', // 表示哪些代码需要优化，有三个可选值：initial(初始块)、async(按需加载块)、all(全部块)，默认为async
@@ -196,7 +196,7 @@ module.exports = {
       const cdn = {
         css: [
           // element-ui css
-          'https://cdn.bootcdn.net/ajax/libs/element-plus/2.1.9/index.css'
+          // 'https://cdn.bootcdn.net/ajax/libs/element-plus/2.1.9/index.css'
         ],
         js: [
           // vue
