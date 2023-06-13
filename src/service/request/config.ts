@@ -11,10 +11,12 @@ const TIME_OUT = 10000
 // 生成环境: production
 // 测试环境: test
 
+// http://123.207.32.32:8000
+
 if (process.env.NODE_ENV === 'development') {
   BASE_URL = '/api'
 } else if (process.env.NODE_ENV === 'production') {
-  BASE_URL = 'http://152.136.185.210:4000'
+  BASE_URL = 'http://152.136.185.210:5000'
 } else {
   BASE_URL = 'http://coderwhy.org/test'
 }

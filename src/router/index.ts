@@ -48,6 +48,7 @@ router.beforeEach((to) => {
 
   // 解决直接访问 localhost:8080 为空白的情况
   if (to.path === '/main') {
+    console.log('firstMenu', firstMenu)
     return firstMenu.url
   }
 })

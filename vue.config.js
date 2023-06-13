@@ -24,7 +24,7 @@ module.exports = {
     proxy: {
       '^/api': {
         // /api 表示拦截以/api开头的请求路径
-        target: 'http://152.136.185.210:4000', // 跨域的域名
+        target: 'http://152.136.185.210:5000', // 跨域的域名
         pathRewrite: {
           '^/api': '' // 把/api变为空字符：'/' 这种接口配置出来   http://XX.XX.XX.XX:8083/login
         },
